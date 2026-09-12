@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Zone 🎮</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #6a5acd, #00bfff);
+      color: white;
+    }
+
+    header {
+      padding: 30px 10px;
+    }
+
+    h1 {
+      font-size: 45px;
+      margin: 10px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+    }
+
+    .games {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .game {
+      background: white;
+      color: #333;
+      width: 250px;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    button {
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: #6a5acd;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #gameArea {
+      display: none;
+      background: white;
+      color: #333;
+      margin: 20px auto;
+      padding: 25px;
+      width: 85%;
+      max-width: 500px;
+      border-radius: 20px;
+    }
+
+    #target {
+      width: 60px;
+      height: 60px;
+      background: red;
+      border-radius: 50%;
+      position: relative;
+      margin: 30px auto;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎮 FUN ZONE 🎮</h1>
+    <p class="subtitle">Play games. Have fun. Beat your score!</p>
+  </header>
+
+  <div class="games">
+
+    <div class="game">
+      <h2>🎯 Tap the Target</h2>
+      <p>How fast can you tap?</p>
+      <button onclick="startGame()">PLAY</button>
+    </div>
+
+    <div class="game">
+      <h2>🧠 Coming Soon</h2>
+      <p>More games are coming!</p>
+      <button onclick="alert('Coming soon! 🚀')">
+        CHECK
+      </button>
+    </div>
+
+    <div class="game">
+      <h2>🏆 Your Score</h2>
+      <p id="bestScore">Best: 0</p>
+    </div>
+
+  </div>
+
+  <div id="gameArea">
+
+    <h2>🎯 TAP THE TARGET!</h2>
+
+    <p>Score: <span id="score">0</span></p>
+
+    <div id="target" onclick="hitTarget()"></div>
+
+    <button onclick="closeGame()">EXIT GAME</button>
+
+  </div>
+
+  <script>
+
+    let score = 0;
+    let best = 0;
+
+    function startGame() {
+      score = 0;
+
+      document.getElementById("score").textContent = score;
+      document.getElementById("gameArea").style.display = "block";
+
+      moveTarget();
+    }
+
+    function hitTarget() {
+      score++;
+
+      document.getElementById("score").textContent = score;
+
+      if (score > best) {
+        best = score;
+        best = score;
+        document.getElementById("bestScore").textContent =
+          "Best: " + best;
+      }
+
+      moveTarget();
+    }
+
+    function moveTarget() {
+
+      let target = document.getElementById("target");
+
+      let x = Math.random() * 250 - 125;
+      let y = Math.random() * 150 - 75;
+
+      target.style.transform =
+        "translate(" + x + "px," + y + "px)";
+    }
+
+    function closeGame() {
+      document.getElementById("gameArea").style.display = "none";
+    }
+
+  </script>
+
+</body>
+</html>
