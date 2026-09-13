@@ -97,7 +97,9 @@
     </div>
 
     <div class="game">
-      <h2>🧠 Coming Soon</h2>
+      <h2><button onclick="document.getElementById('quizGame').style.display='block'">
+🧠 Quiz Game
+  </button></h2>
       <p>More games are coming!</p>
       <button onclick="alert('Coming soon! 🚀')">
         CHECK
@@ -168,6 +170,30 @@
     }
 
   </script>
+<div id="quizGame" style="display:none;">
+  <h2>🧠 Quiz Game</h2>
+  <p id="question">What is 5 + 5?</p>
 
+  <button onclick="answer('10')">10</button>
+  <button onclick="answer('15')">15</button>
+  <button onclick="answer('20')">20</button>
+
+  <p id="quizResult"></p>
+</div>
+
+<script>
+let quizScore = 0;
+
+function answer(choice) {
+  if (choice === "10") {
+    quizScore++;
+    document.getElementById("quizResult").textContent =
+      "🎉 Correct! Score: " + quizScore;
+  } else {
+    document.getElementById("quizResult").textContent =
+      "❌ Not quite! Try again.";
+  }
+}
+  </script>
 </body>
 </html>
