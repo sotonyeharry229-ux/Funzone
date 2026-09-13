@@ -96,12 +96,15 @@
       <button onclick="startGame()">PLAY</button>
     </div>
 
-    <div class="game">
-      <h2><button onclick="document.getElementById('quizGame').style.display='block'">
-🧠 Quiz Game
-  </button></h2>
-      
-        CHECK
+
+        <div class="game">
+  <h2>🧠 Quiz Game</h2>
+  <p>Test your brain!</p>
+
+  <button onclick="document.getElementById('quizGame').style.display='block'">
+    PLAY
+  </button>
+        </div>
       </button>
     </div>
 
@@ -169,7 +172,9 @@
     }
 
   </script>
-<div id="quizGame" style="display:none;">
+<button onclick="document.getElementById('quizGame').style.display='none'">
+  BACK
+  </button><div id="quizGame" style="display:none;">
   <h2>🧠 Quiz Game</h2>
   <p id="question">What is 5 + 5?</p>
 
