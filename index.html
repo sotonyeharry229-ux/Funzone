@@ -2,359 +2,136 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Fun Zone 🎮</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;color:white;text-align:center;
+ background:linear-gradient(135deg,#12002f,#001b44,#006078);
+ min-height:100vh
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  text-align: center;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top, #7c4dff, transparent 40%),
-    linear-gradient(135deg, #12002f, #001b44, #002f4b);
+header{padding:35px 12px 20px}
+h1{font-size:48px;margin:5px;text-shadow:0 0 20px #00eaff}
+.subtitle{font-size:18px}
+.games{
+ display:flex;flex-wrap:wrap;justify-content:center;gap:18px;padding:20px
 }
-
-/* HOME PAGE */
-
-header {
-  padding: 45px 15px 25px;
+.card{
+ width:280px;padding:24px 15px;border-radius:22px;
+ background:white;color:#222;box-shadow:0 10px 30px #0008;
+ transition:.2s
 }
-
-.logo {
-  font-size: 48px;
-  font-weight: bold;
-  margin: 0;
-  text-shadow: 0 0 15px #00eaff;
+.card:hover{transform:translateY(-5px)}
+.icon{font-size:45px}
+button{
+ border:0;border-radius:13px;padding:13px 20px;margin:6px;
+ background:linear-gradient(135deg,#6845ff,#00aaff);
+ color:white;font-weight:bold;font-size:16px
 }
-
-.subtitle {
-  font-size: 18px;
-  opacity: 0.9;
+button:active{transform:scale(.94)}
+.screen{
+ display:none;background:white;color:#222;width:94%;max-width:600px;
+ margin:20px auto;padding:20px;border-radius:25px;
+ box-shadow:0 10px 35px #0008
 }
-
-.welcome {
-  background: rgba(255,255,255,0.12);
-  margin: 10px auto 25px;
-  padding: 18px;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
+canvas{
+ display:block;width:100%;max-width:560px;height:auto;
+ background:#071126;border-radius:15px;margin:15px auto
 }
-
-.games {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 18px;
-  padding: 15px;
-}
-
-.card {
-  width: 280px;
-  padding: 25px 18px;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.95);
-  color: #222;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-}
-
-.card-icon {
-  font-size: 45px;
-}
-
-.card h2 {
-  margin: 10px 0;
-}
-
-button {
-  border: none;
-  padding: 13px 22px;
-  margin: 7px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #6a5acd, #00aaff);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-/* GAME SCREENS */
-
-.gameScreen {
-  display: none;
-  background: white;
-  color: #222;
-  width: 92%;
-  max-width: 520px;
-  margin: 25px auto;
-  padding: 25px;
-  border-radius: 25px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
-}
-
-.gameScreen h2 {
-  color: #4935b5;
-}
-
-.score {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* TARGET */
-
-#target {
-  width: 65px;
-  height: 65px;
-  background: #ff1744;
-  border-radius: 50%;
-  margin: 35px auto;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(255,0,0,0.5);
-}
-
-/* REACTION */
-
-#reactionBox {
-  height: 200px;
-  border-radius: 20px;
-  background: #555;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 20px 0;
-}
-
-/* INPUT */
-
-input {
-  padding: 13px;
-  width: 170px;
-  border: 2px solid #6a5acd;
-  border-radius: 12px;
-  font-size: 18px;
-  text-align: center;
-}
-
-footer {
-  padding: 30px;
-  opacity: 0.7;
+.controls{margin:8px}
+.controls button{font-size:25px;min-width:65px}
+.info{font-weight:bold;font-size:18px}
+input{
+ padding:12px;border-radius:10px;border:2px solid #6845ff;
+ font-size:17px
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HOME ================= -->
-
 <div id="home">
 
 <header>
-  <h1 class="logo">🎮 FUN ZONE 🎮</h1>
-  <p class="subtitle">Play • Challenge • Have Fun!</p>
+<h1>🎮 FUN ZONE 🎮</h1>
+<p class="subtitle">Real games. Real challenges. Have fun!</p>
 </header>
-
-<div class="welcome">
-  <h2>🔥 Welcome to Fun Zone!</h2>
-  <p>Choose a game and see how good you are.</p>
-</div>
 
 <div class="games">
 
-  <div class="card">
-    <div class="card-icon">🎯</div>
-    <h2>Tap the Target</h2>
-    <p>Tap the target as many times as you can!</p>
-    <button onclick="showGame('targetGame')">PLAY 🎮</button>
-  </div>
+<div class="card">
+<div class="icon">🏎️</div>
+<h2>Neon Racer</h2>
+<p>Dodge traffic and survive as long as possible.</p>
+<button onclick="startGame('racer')">PLAY</button>
+</div>
 
-  <div class="card">
-    <div class="card-icon">🧠</div>
-    <h2>Quiz Game</h2>
-    <p>Answer the questions and test your brain.</p>
-    <button onclick="startQuiz()">PLAY 🧠</button>
-  </div>
+<div class="card">
+<div class="icon">🧱</div>
+<h2>Block Breaker</h2>
+<p>Break every block with your bouncing ball.</p>
+<button onclick="startGame('breaker')">PLAY</button>
+</div>
 
-  <div class="card">
-    <div class="card-icon">🪨</div>
-    <h2>Rock Paper Scissors</h2>
-    <p>Can you beat the computer?</p>
-    <button onclick="showGame('rpsGame')">PLAY ✂️</button>
-  </div>
+<div class="card">
+<div class="icon">👾</div>
+<h2>Space Defender</h2>
+<p>Defend your spaceship from incoming enemies.</p>
+<button onclick="startGame('space')">PLAY</button>
+</div>
 
-  <div class="card">
-    <div class="card-icon">⚡</div>
-    <h2>Reaction Game</h2>
-    <p>Test how fast your reaction is!</p>
-    <button onclick="showGame('reactionGame')">PLAY ⚡</button>
-  </div>
+<div class="card">
+<div class="icon">🏃</div>
+<h2>Sky Runner</h2>
+<p>Run, jump and avoid the obstacles.</p>
+<button onclick="startGame('runner')">PLAY</button>
+</div>
 
-  <div class="card">
-    <div class="card-icon">🔢</div>
-    <h2>Number Guessing</h2>
-    <p>Guess the secret number from 1–100.</p>
-    <button onclick="startNumberGame()">PLAY 🔢</button>
-  </div>
+<div class="card">
+<div class="icon">🧩</div>
+<h2>Maze Escape</h2>
+<p>Find your way through the maze.</p>
+<button onclick="startGame('maze')">PLAY</button>
+</div>
 
-  <div class="card">
-    <div class="card-icon">🏆</div>
-    <h2>🏆 High Scores</h2>
-    <p>Target Score: <b id="bestTarget">0</b></p>
-    <p>Quiz Score: <b id="bestQuiz">0</b></p>
-    <p>RPS Wins: <b id="bestRPS">0</b></p>
-    <p>Best Reaction: <b id="bestReaction">--</b></p>
-  </div>
+<div class="card">
+<div class="icon">🧟</div>
+<h2>Zombie Survival</h2>
+<p>Survive waves of enemies.</p>
+<button onclick="startGame('zombie')">PLAY</button>
+</div>
+
+<div class="card">
+<div class="icon">⚽</div>
+<h2>Penalty Shootout</h2>
+<p>Score as many goals as possible.</p>
+<button onclick="startGame('penalty')">PLAY</button>
+</div>
 
 </div>
 
-<footer>
-  🎮 More games coming soon!
-</footer>
-
+<p>🔥 More games coming soon!</p>
 </div>
 
 
-<!-- ================= TARGET GAME ================= -->
+<!-- GAME SCREEN -->
 
-<div class="gameScreen" id="targetGame">
+<div class="screen" id="gameScreen">
 
-<h2>🎯 TAP THE TARGET</h2>
+<h2 id="gameTitle">🎮 GAME</h2>
 
-<p class="score">
-Score: <span id="targetScore">0</span>
-</p>
-
-<div id="target" onclick="hitTarget()"></div>
-
-<button onclick="startTarget()">START</button>
-
-<button onclick="backHome()">🏠 HOME</button>
-
+<div class="info">
+Score: <span id="score">0</span>
+&nbsp; ❤️ <span id="lives">3</span>
 </div>
 
+<canvas id="game" width="560" height="420"></canvas>
 
-<!-- ================= QUIZ GAME ================= -->
+<div class="controls" id="controls"></div>
 
-<div class="gameScreen" id="quizGame">
-
-<h2>🧠 QUIZ GAME</h2>
-
-<p id="quizQuestion"></p>
-
-<div id="quizButtons"></div>
-
-<p id="quizResult"></p>
-
-<p class="score">
-Score: <span id="quizScore">0</span>
-</p>
-
-<button onclick="nextQuestion()">NEXT ➡️</button>
-
-<button onclick="backHome()">🏠 HOME</button>
-
-</div>
-
-
-<!-- ================= ROCK PAPER SCISSORS ================= -->
-
-<div class="gameScreen" id="rpsGame">
-
-<h2>🪨 📄 ✂️</h2>
-
-<h2>ROCK PAPER SCISSORS</h2>
-
-<p>Choose your move!</p>
-
-<button onclick="playRPS('Rock')">🪨 ROCK</button>
-
-<button onclick="playRPS('Paper')">📄 PAPER</button>
-
-<button onclick="playRPS('Scissors')">✂️ SCISSORS</button>
-
-<p id="rpsResult"></p>
-
-<p class="score">
-Your wins: <span id="rpsScore">0</span>
-</p>
-
-<button onclick="backHome()">🏠 HOME</button>
-
-</div>
-
-
-<!-- ================= REACTION GAME ================= -->
-
-<div class="gameScreen" id="reactionGame">
-
-<h2>⚡ REACTION GAME</h2>
-
-<p id="reactionMessage">
-Press START and wait for GREEN!
-</p>
-
-<div id="reactionBox" onclick="reactionClick()">
-WAIT
-</div>
-
-<p class="score">
-Time: <span id="reactionTime">--</span> ms
-</p>
-
-<button onclick="startReaction()">START</button>
-
-<button onclick="backHome()">🏠 HOME</button>
-
-</div>
-
-
-<!-- ================= NUMBER GAME ================= -->
-
-<div class="gameScreen" id="numberGame">
-
-<h2>🔢 NUMBER GUESSING</h2>
-
-<p>I'm thinking of a number between 1 and 100.</p>
-
-<input
-  type="number"
-  id="guessInput"
-  placeholder="Your guess"
->
-
-<br>
-
-<button onclick="makeGuess()">GUESS 🎯</button>
-
-<p id="guessResult"></p>
-
-<p>
-Attempts: <b id="attempts">0</b>
-</p>
-
-<button onclick="startNumberGame()">NEW NUMBER</button>
+<p id="message"></p>
 
 <button onclick="backHome()">🏠 HOME</button>
 
@@ -363,407 +140,949 @@ Attempts: <b id="attempts">0</b>
 
 <script>
 
-/* ================= GENERAL ================= */
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
-function showGame(id) {
+let game="";
+let running=false;
+let score=0;
+let lives=3;
+let keys={};
+let animation=0;
+let objects=[];
+let player={x:280,y:350,w:35,h:35};
+let lastTime=0;
 
-  document.getElementById("home").style.display = "none";
 
-  let screens = document.querySelectorAll(".gameScreen");
+/* =========================
+GENERAL
+========================= */
 
-  screens.forEach(function(screen) {
-    screen.style.display = "none";
-  });
+function startGame(type){
 
-  document.getElementById(id).style.display = "block";
+ game=type;
+ score=0;
+ lives=3;
+ objects=[];
+ running=true;
+
+ document.getElementById("home").style.display="none";
+ document.getElementById("gameScreen").style.display="block";
+
+ document.getElementById("score").textContent=score;
+ document.getElementById("lives").textContent=lives;
+
+ setupControls();
+
+ if(type==="racer") racerStart();
+ if(type==="breaker") breakerStart();
+ if(type==="space") spaceStart();
+ if(type==="runner") runnerStart();
+ if(type==="maze") mazeStart();
+ if(type==="zombie") zombieStart();
+ if(type==="penalty") penaltyStart();
+
+ cancelAnimationFrame(animation);
+ lastTime=performance.now();
+ loop(lastTime);
 }
 
 
-function backHome() {
+function backHome(){
 
-  document.querySelectorAll(".gameScreen").forEach(function(screen) {
-    screen.style.display = "none";
-  });
+ running=false;
+ cancelAnimationFrame(animation);
 
-  document.getElementById("home").style.display = "block";
+ document.getElementById("gameScreen").style.display="none";
+ document.getElementById("home").style.display="block";
 }
 
 
-/* ================= TARGET GAME ================= */
+function loop(time){
 
-let targetScore = 0;
-let bestTarget = 0;
+ if(!running)return;
 
-function startTarget() {
+ let dt=Math.min((time-lastTime)/16.67,3);
+ lastTime=time;
 
-  showGame("targetGame");
+ update(dt);
+ draw();
 
-  targetScore = 0;
-
-  document.getElementById("targetScore").textContent = 0;
-
-  moveTarget();
+ animation=requestAnimationFrame(loop);
 }
 
 
-function hitTarget() {
+function update(dt){
 
-  targetScore++;
-
-  document.getElementById("targetScore").textContent =
-    targetScore;
-
-  if (targetScore > bestTarget) {
-
-    bestTarget = targetScore;
-
-    document.getElementById("bestTarget").textContent =
-      bestTarget;
-  }
-
-  moveTarget();
+ if(game==="racer") racerUpdate(dt);
+ if(game==="breaker") breakerUpdate(dt);
+ if(game==="space") spaceUpdate(dt);
+ if(game==="runner") runnerUpdate(dt);
+ if(game==="maze") mazeUpdate(dt);
+ if(game==="zombie") zombieUpdate(dt);
 }
 
 
-function moveTarget() {
+function draw(){
 
-  let target = document.getElementById("target");
+ ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  let x = Math.random() * 220 - 110;
-
-  let y = Math.random() * 140 - 70;
-
-  target.style.transform =
-    "translate(" + x + "px, " + y + "px)";
+ if(game==="racer") racerDraw();
+ if(game==="breaker") breakerDraw();
+ if(game==="space") spaceDraw();
+ if(game==="runner") runnerDraw();
+ if(game==="maze") mazeDraw();
+ if(game==="zombie") zombieDraw();
 }
 
 
-/* ================= QUIZ GAME ================= */
+function setupControls(){
 
-let quizScore = 0;
-let quizIndex = 0;
+ let c=document.getElementById("controls");
 
-let questions = [
+ c.innerHTML=
+ `<button data-key="left">⬅️</button>
+  <button data-key="up">⬆️</button>
+  <button data-key="down">⬇️</button>
+  <button data-key="right">➡️</button>`;
 
-  {
-    q: "What is 5 + 5?",
-    options: ["10", "15", "20"],
-    answer: "10"
-  },
+ document.querySelectorAll("[data-key]").forEach(b=>{
 
-  {
-    q: "What is the capital of Nigeria?",
-    options: ["Lagos", "Abuja", "Kano"],
-    answer: "Abuja"
-  },
+   b.onpointerdown=()=>keys[b.dataset.key]=true;
+   b.onpointerup=()=>keys[b.dataset.key]=false;
+   b.onpointerleave=()=>keys[b.dataset.key]=false;
 
-  {
-    q: "How many sides does a triangle have?",
-    options: ["3", "4", "5"],
-    answer: "3"
-  },
-
-  {
-    q: "What is 10 × 2?",
-    options: ["10", "20", "30"],
-    answer: "20"
-  },
-
-  {
-    q: "Which planet do we live on?",
-    options: ["Mars", "Earth", "Jupiter"],
-    answer: "Earth"
-  }
-
-];
-
-
-function startQuiz() {
-
-  showGame("quizGame");
-
-  quizScore = 0;
-  quizIndex = 0;
-
-  document.getElementById("quizScore").textContent = 0;
-
-  showQuestion();
+ });
 }
 
 
-function showQuestion() {
+function hit(a,b){
 
-  let question = questions[quizIndex];
-
-  document.getElementById("quizQuestion").textContent =
-    question.q;
-
-  document.getElementById("quizResult").textContent = "";
-
-  let area = document.getElementById("quizButtons");
-
-  area.innerHTML = "";
-
-  question.options.forEach(function(option) {
-
-    let button = document.createElement("button");
-
-    button.textContent = option;
-
-    button.onclick = function() {
-      checkAnswer(option);
-    };
-
-    area.appendChild(button);
-  });
+ return a.x<a.x+a.w &&
+        a.x+a.w>b.x &&
+        a.y<a.y+a.h &&
+        a.y+a.h>b.y;
 }
 
 
-function checkAnswer(choice) {
+function collision(a,b){
 
-  let correct = questions[quizIndex].answer;
-
-  if (choice === correct) {
-
-    quizScore++;
-
-    document.getElementById("quizResult").textContent =
-      "🎉 Correct!";
-
-    document.getElementById("quizScore").textContent =
-      quizScore;
-
-  } else {
-
-    document.getElementById("quizResult").textContent =
-      "❌ Wrong! The answer was " + correct;
-  }
+ return a.x < b.x+b.w &&
+        a.x+a.w > b.x &&
+        a.y < b.y+b.h &&
+        a.y+a.h > b.y;
 }
 
 
-function nextQuestion() {
+function endGame(text){
 
-  quizIndex++;
+ running=false;
 
-  if (quizIndex >= questions.length) {
+ document.getElementById("message").textContent=
+ text+" Final score: "+score;
 
-    document.getElementById("quizQuestion").textContent =
-      "🎉 QUIZ FINISHED!";
-
-    document.getElementById("quizButtons").innerHTML = "";
-
-    document.getElementById("quizResult").textContent =
-      "Your final score is " +
-      quizScore + "/" + questions.length;
-
-    if (
-      quizScore >
-      Number(document.getElementById("bestQuiz").textContent)
-    ) {
-
-      document.getElementById("bestQuiz").textContent =
-        quizScore;
-    }
-
-    return;
-  }
-
-  showQuestion();
 }
 
 
-/* ================= ROCK PAPER SCISSORS ================= */
+/* =========================
+🏎️ NEON RACER
+========================= */
 
-let rpsWins = 0;
+let roadX=100;
+let cars=[];
+let racerTime=0;
 
-function playRPS(player) {
+function racerStart(){
 
-  let choices = [
-    "Rock",
-    "Paper",
-    "Scissors"
-  ];
+ document.getElementById("gameTitle").textContent="🏎️ NEON RACER";
 
-  let computer =
-    choices[Math.floor(Math.random() * 3)];
+ cars=[];
+racerTime=0;
 
-  let result = "";
+ player={x:265,y:340,w:30,h:55};
 
-  if (player === computer) {
-
-    result = "🤝 DRAW!";
-
-  }
-
-  else if (
-
-    (player === "Rock" && computer === "Scissors") ||
-
-    (player === "Paper" && computer === "Rock") ||
-
-    (player === "Scissors" && computer === "Paper")
-
-  ) {
-
-    result = "🎉 YOU WIN!";
-
-    rpsWins++;
-
-    document.getElementById("rpsScore").textContent =
-      rpsWins;
-
-    document.getElementById("bestRPS").textContent =
-      rpsWins;
-
-  }
-
-  else {
-
-    result = "😅 COMPUTER WINS!";
-  }
-
-  document.getElementById("rpsResult").textContent =
-    "You: " + player +
-    " | Computer: " + computer +
-    " → " + result;
+ for(let i=0;i<3;i++){
+   cars.push({
+    x:130+Math.random()*280,
+    y:-i*180-80,
+    w:30,h:55,
+    speed:3+Math.random()*2
+   });
+ }
 }
 
 
-/* ================= REACTION GAME ================= */
+function racerUpdate(dt){
 
-let reactionReady = false;
-let reactionStart = 0;
-let reactionTimer = null;
+ racerTime+=dt;
 
-function startReaction() {
+ if(keys.left)player.x-=5*dt;
+ if(keys.right)player.x+=5*dt;
 
-  reactionReady = false;
+ player.x=Math.max(110,Math.min(420,player.x));
 
-  document.getElementById("reactionMessage").textContent =
-    "WAIT FOR GREEN...";
+ cars.forEach(car=>{
 
-  document.getElementById("reactionBox").textContent =
-    "WAIT...";
+   car.y+=car.speed*dt;
 
-  clearTimeout(reactionTimer);
+   if(car.y>450){
 
-  let delay =
-    Math.floor(Math.random() * 3000) + 1000;
+     car.y=-80;
+     car.x=120+Math.random()*290;
+     car.speed+=.1;
+     score++;
+     document.getElementById("score").textContent=score;
+   }
 
-  reactionTimer = setTimeout(function() {
+   if(collision(player,car)){
 
-    reactionReady = true;
+     car.y=-100;
+     lives--;
 
-    reactionStart = Date.now();
+     document.getElementById("lives").textContent=lives;
 
-    document.getElementById("reactionBox").textContent =
-      "🟢 TAP NOW!";
+     if(lives<=0)endGame("💥 Crash!");
+   }
 
-    document.getElementById("reactionMessage").textContent =
-      "GO!";
-
-  }, delay);
+ });
 }
 
 
-function reactionClick() {
+function racerDraw(){
 
-  if (!reactionReady) {
+ ctx.fillStyle="#111";
+ ctx.fillRect(0,0,560,420);
 
-    document.getElementById("reactionMessage").textContent =
-      "❌ Too early! Press START again.";
+ ctx.fillStyle="#333";
+ ctx.fillRect(100,0,330,420);
 
-    clearTimeout(reactionTimer);
+ ctx.strokeStyle="white";
+ ctx.lineWidth=5;
+ ctx.setLineDash([30,25]);
 
-    return;
-  }
+ ctx.beginPath();
+ ctx.moveTo(265,0);
+ ctx.lineTo(265,420);
+ ctx.moveTo(375,0);
+ ctx.lineTo(375,420);
+ ctx.stroke();
+ ctx.setLineDash([]);
 
-  let time =
-    Date.now() - reactionStart;
+ ctx.fillStyle="#00eaff";
+ ctx.fillRect(player.x,player.y,player.w,player.h);
 
-  reactionReady = false;
+ ctx.fillStyle="#ff1744";
 
-  document.getElementById("reactionTime").textContent =
-    time;
-
-  document.getElementById("reactionMessage").textContent =
-    "⚡ Amazing reaction!";
-
-  let best =
-    document.getElementById("bestReaction");
-
-  if (
-    best.textContent === "--" ||
-    time < Number(best.textContent.replace(" ms", ""))
-  ) {
-
-    best.textContent =
-      time + " ms";
-  }
+ cars.forEach(c=>ctx.fillRect(c.x,c.y,c.w,c.h));
 }
 
 
-/* ================= NUMBER GUESSING ================= */
+/* =========================
+🧱 BLOCK BREAKER
+========================= */
 
-let secretNumber = 0;
-let attempts = 0;
+let ball;
+let paddle;
+let bricks;
 
-function startNumberGame() {
+function breakerStart(){
 
-  showGame("numberGame");
+ document.getElementById("gameTitle").textContent="🧱 BLOCK BREAKER";
 
-  secretNumber =
-    Math.floor(Math.random() * 100) + 1;
+ ball={x:280,y:320,dx:4,dy:-4,r:8};
 
-  attempts = 0;
+ paddle={x:230,y:390,w:100,h:12};
 
-  document.getElementById("attempts").textContent = 0;
+ bricks=[];
 
-  document.getElementById("guessResult").textContent =
-    "Make your first guess!";
+ for(let r=0;r<5;r++){
 
-  document.getElementById("guessInput").value = "";
+   for(let c=0;c<8;c++){
+
+     bricks.push({
+       x:35+c*65,
+       y:45+r*25,
+       w:55,
+       h:15,
+       alive:true
+     });
+
+   }
+ }
+
+ document.getElementById("controls").innerHTML=
+ `<button data-key="left">⬅️</button>
+  <button data-key="right">➡️</button>`;
 }
 
 
-function makeGuess() {
+function breakerUpdate(dt){
 
-  let guess =
-    Number(document.getElementById("guessInput").value);
+ if(keys.left)paddle.x-=7*dt;
+ if(keys.right)paddle.x+=7*dt;
 
-  if (guess < 1 || guess > 100) {
+ paddle.x=Math.max(0,Math.min(460,paddle.x));
 
-    document.getElementById("guessResult").textContent =
-      "⚠️ Enter a number from 1 to 100.";
+ ball.x+=ball.dx*dt;
+ ball.y+=ball.dy*dt;
 
-    return;
-  }
+ if(ball.x<ball.r||ball.x>560-ball.r)ball.dx*=-1;
+ if(ball.y<ball.r)ball.dy*=-1;
 
-  attempts++;
+ if(
+ ball.y+ball.r>=paddle.y &&
+ ball.x>paddle.x &&
+ ball.x<paddle.x+paddle.w
+ ){
+   ball.dy=-Math.abs(ball.dy);
+ }
 
-  document.getElementById("attempts").textContent =
-    attempts;
+ bricks.forEach(b=>{
 
-  if (guess === secretNumber) {
+   if(b.alive&&
+      ball.x>b.x&&
+      ball.x<b.x+b.w&&
+      ball.y>b.y&&
+      ball.y<b.y+b.h){
 
-    document.getElementById("guessResult").textContent =
-      "🎉 CORRECT! You got it in " +
-      attempts + " attempts!";
+     b.alive=false;
+     ball.dy*=-1;
+     score++;
+     document.getElementById("score").textContent=score;
+   }
 
-  }
+ });
 
-  else if (guess < secretNumber) {
+ if(ball.y>430){
 
-    document.getElementById("guessResult").textContent =
-      "⬆️ Too low! Try a higher number.";
+   lives--;
+   document.getElementById("lives").textContent=lives;
 
-  }
+   ball={x:280,y:320,dx:4,dy:-4,r:8};
 
-  else {
+   if(lives<=0)endGame("💥 Game over!");
+ }
 
-    document.getElementById("guessResult").textContent =
-      "⬇️ Too high! Try a lower number.";
-  }
+ if(bricks.every(b=>!b.alive))endGame("🏆 LEVEL CLEARED!");
+}
+
+
+function breakerDraw(){
+
+ ctx.fillStyle="#090d25";
+ ctx.fillRect(0,0,560,420);
+
+ bricks.forEach(b=>{
+
+   if(b.alive){
+
+     ctx.fillStyle="#00d9ff";
+     ctx.fillRect(b.x,b.y,b.w,b.h);
+   }
+ });
+
+ ctx.fillStyle="#fff";
+ ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
+
+ ctx.beginPath();
+ ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);
+ ctx.fillStyle="#ffeb3b";
+ ctx.fill();
+}
+
+
+/* =========================
+👾 SPACE DEFENDER
+========================= */
+
+let enemies=[];
+let bullets=[];
+
+function spaceStart(){
+
+ document.getElementById("gameTitle").textContent="👾 SPACE DEFENDER";
+
+ player={x:265,y:360,w:30,h:30};
+
+ enemies=[];
+ bullets=[];
+
+ for(let i=0;i<6;i++){
+
+   enemies.push({
+    x:30+i*85,
+    y:40,
+    w:35,
+    h:25,
+    dx:1.5
+   });
+ }
+
+ document.getElementById("controls").innerHTML=
+ `<button data-key="left">⬅️</button>
+  <button data-key="fire">🚀 FIRE</button>
+  <button data-key="right">➡️</button>`;
+
+ document.querySelector("[data-key=fire]").onclick=fireBullet;
+}
+
+
+function fireBullet(){
+
+ bullets.push({
+  x:player.x+13,
+  y:player.y,
+  w:5,
+  h:15
+ });
+}
+
+
+function spaceUpdate(dt){
+
+ if(keys.left)player.x-=6*dt;
+ if(keys.right)player.x+=6*dt;
+
+ player.x=Math.max(0,Math.min(530,player.x));
+
+ bullets.forEach(b=>b.y-=8*dt);
+
+ enemies.forEach(e=>{
+
+   e.x+=e.dx*dt;
+
+   if(e.x<0||e.x>525){
+     e.dx*=-1;
+     e.y+=18;
+   }
+
+   if(e.y>330)endGame("👾 The aliens reached you!");
+ });
+
+ bullets.forEach(b=>{
+
+   enemies.forEach(e=>{
+
+     if(e.w&&collision(b,e)){
+
+       e.w=0;
+       score++;
+       document.getElementById("score").textContent=score;
+     }
+
+   });
+
+ });
+
+ enemies=enemies.filter(e=>e.w);
+
+ if(enemies.length===0){
+
+   score+=10;
+   endGame("🚀 YOU SAVED THE GALAXY!");
+ }
+}
+
+
+function spaceDraw(){
+
+ ctx.fillStyle="#020515";
+ ctx.fillRect(0,0,560,420);
+
+ ctx.fillStyle="#fff";
+
+ for(let i=0;i<50;i++){
+
+   ctx.fillRect((i*83)%560,(i*47)%420,2,2);
+ }
+
+ ctx.fillStyle="#00eaff";
+ ctx.fillRect(player.x,player.y,player.w,player.h);
+
+ ctx.fillStyle="#ff1744";
+
+ enemies.forEach(e=>{
+
+   if(e.w)ctx.fillRect(e.x,e.y,e.w,e.h);
+ });
+
+ ctx.fillStyle="#ffeb3b";
+
+ bullets.forEach(b=>ctx.fillRect(b.x,b.y,b.w,b.h));
+}
+
+
+/* =========================
+🏃 SKY RUNNER
+========================= */
+
+let runnerGround=370;
+let runnerVelocity=0;
+let obstacles=[];
+let runnerDistance=0;
+
+function runnerStart(){
+
+ document.getElementById("gameTitle").textContent="🏃 SKY RUNNER";
+
+ player={x:80,y:330,w:35,h:40};
+
+ runnerVelocity=0;
+ obstacles=[];
+ runnerDistance=0;
+
+ document.getElementById("controls").innerHTML=
+ `<button data-key="jump">⬆️ JUMP</button>`;
+
+ document.querySelector("[data-key=jump]").onclick=jump;
+}
+
+
+function jump(){
+
+ if(player.y>=runnerGround-player.h-2)
+   runnerVelocity=-12;
+}
+
+
+function runnerUpdate(dt){
+
+ runnerDistance+=dt;
+
+ runnerVelocity+=.55*dt;
+ player.y+=runnerVelocity*dt;
+
+ if(player.y>runnerGround-player.h){
+   player.y=runnerGround-player.h;
+   runnerVelocity=0;
+ }
+
+ if(Math.random()<.025*dt){
+
+   obstacles.push({
+    x:560,
+    y:runnerGround-35,
+    w:30,
+    h:35
+   });
+ }
+
+ obstacles.forEach(o=>o.x-=5*dt);
+
+ obstacles.forEach(o=>{
+
+   if(collision(player,o)){
+
+     lives--;
+     document.getElementById("lives").textContent=lives;
+     o.x=-100;
+
+     if(lives<=0)endGame("💥 You hit an obstacle!");
+   }
+
+ });
+
+ obstacles=obstacles.filter(o=>o.x>-50);
+
+ score=Math.floor(runnerDistance/10);
+
+ document.getElementById("score").textContent=score;
+}
+
+
+function runnerDraw(){
+
+ ctx.fillStyle="#66ccff";
+ ctx.fillRect(0,0,560,420);
+
+ ctx.fillStyle="#48a868";
+ ctx.fillRect(0,runnerGround,560,50);
+
+ ctx.fillStyle="#6845ff";
+ ctx.fillRect(player.x,player.y,player.w,player.h);
+
+ ctx.fillStyle="#222";
+
+ obstacles.forEach(o=>
+   ctx.fillRect(o.x,o.y,o.w,o.h)
+ );
+}
+
+
+/* =========================
+🧩 MAZE ESCAPE
+========================= */
+
+let maze;
+let mazeCell=70;
+
+function mazeStart(){
+
+ document.getElementById("gameTitle").textContent="🧩 MAZE ESCAPE";
+
+ maze=[
+  [1,1,1,1,1,1,1,1],
+  [1,0,0,0,1,0,0,1],
+  [1,0,1,0,1,0,0,1],
+  [1,0,1,0,0,0,1,1],
+  [1,0,1,1,1,0,0,1],
+  [1,0,0,0,0,0,0,1],
+  [1,1,1,1,1,1,0,1],
+  [1,1,1,1,1,1,1,1]
+ ];
+
+ player={x:1,y:1,w:1,h:1};
+
+ document.getElementById("controls").innerHTML=
+ `<button data-key="up">⬆️</button>
+  <button data-key="left">⬅️</button>
+  <button data-key="down">⬇️</button>
+  <button data-key="right">➡️</button>`;
+
+ score=0;
+}
+
+
+function mazeUpdate(){
+
+ let nx=player.x;
+ let ny=player.y;
+
+ if(keys.left){nx--;keys.left=false}
+ if(keys.right){nx++;keys.right=false}
+ if(keys.up){ny--;keys.up=false}
+ if(keys.down){ny++;keys.down=false}
+
+ if(maze[ny]&&maze[ny][nx]===0){
+
+   player.x=nx;
+   player.y=ny;
+   score++;
+   document.getElementById("score").textContent=score;
+ }
+
+ if(player.x===6&&player.y===6)
+   endGame("🏆 YOU ESCAPED!");
+}
+
+
+function mazeDraw(){
+
+ ctx.fillStyle="#111";
+ ctx.fillRect(0,0,560,420);
+
+ for(let y=0;y<8;y++){
+
+   for(let x=0;x<8;x++){
+
+     ctx.fillStyle=
+       maze[y][x]===1 ? "#5533aa" : "#eee";
+
+     ctx.fillRect(
+       x*mazeCell,
+       y*mazeCell,
+       mazeCell-2,
+       mazeCell-2
+     );
+   }
+ }
+
+ ctx.fillStyle="#00c853";
+
+ ctx.fillRect(
+  6*mazeCell+15,
+  6*mazeCell+15,
+  40,40
+ );
+
+ ctx.fillStyle="#ff1744";
+
+ ctx.beginPath();
+
+ ctx.arc(
+  player.x*mazeCell+35,
+  player.y*mazeCell+35,
+  20,0,Math.PI*2
+ );
+
+ ctx.fill();
+}
+
+
+/* =========================
+🧟 ZOMBIE SURVIVAL
+========================= */
+
+let zombies=[];
+let shots=[];
+let zombieTime=0;
+
+function zombieStart(){
+
+ document.getElementById("gameTitle").textContent="🧟 ZOMBIE SURVIVAL";
+
+ player={
+  x:280,y:210,w:30,h:30
+ };
+
+ zombies=[];
+ shots=[];
+ zombieTime=0;
+
+ document.getElementById("controls").innerHTML=
+ `<button data-key="up">⬆️</button>
+  <button data-key="left">⬅️</button>
+  <button data-key="fire">🔥</button>
+  <button data-key="right">➡️</button>
+  <button data-key="down">⬇️</button>`;
+
+ document.querySelector("[data-key=fire]").onclick=shoot;
+}
+
+
+function shoot(){
+
+ shots.push({
+  x:player.x+12,
+  y:player.y+12,
+  dx:0,
+  dy:-8
+ });
+}
+
+
+function zombieUpdate(dt){
+
+ zombieTime+=dt;
+
+ if(keys.left)player.x-=4*dt;
+ if(keys.right)player.x+=4*dt;
+ if(keys.up)player.y-=4*dt;
+ if(keys.down)player.y+=4*dt;
+
+ player.x=Math.max(0,Math.min(530,player.x));
+ player.y=Math.max(0,Math.min(390,player.y));
+
+ if(Math.random()<.018*dt){
+
+   let side=Math.floor(Math.random()*4);
+
+   let z={
+    x:0,y:0,w:28,h:28,speed:1+Math.random()
+   };
+
+   if(side===0){z.x=Math.random()*560;z.y=-30}
+   if(side===1){z.x=560;z.y=Math.random()*420}
+   if(side===2){z.x=Math.random()*560;z.y=420}
+   if(side===3){z.x=-30;z.y=Math.random()*420}
+
+   zombies.push(z);
+ }
+
+ zombies.forEach(z=>{
+
+   let dx=player.x-z.x;
+   let dy=player.y-z.y;
+   let d=Math.sqrt(dx*dx+dy*dy)||1;
+
+   z.x+=dx/d*z.speed*dt;
+   z.y+=dy/d*z.speed*dt;
+
+   if(collision(player,z)){
+
+     z.x=-100;
+     lives--;
+
+     document.getElementById("lives").textContent=lives;
+
+     if(lives<=0)
+       endGame("🧟 You were caught!");
+   }
+ });
+
+ shots.forEach(s=>{
+   s.y+=s.dy*dt;
+ });
+
+ shots.forEach(s=>{
+
+   zombies.forEach(z=>{
+
+     if(collision(
+       {x:s.x,y:s.y,w:5,h:10},z
+     )){
+
+       z.x=-100;
+       s.y=-100;
+
+       score++;
+
+       document.getElementById("score").textContent=score;
+     }
+   });
+ });
+
+ zombies=zombies.filter(z=>z.x>-80&&z.x<640);
+ shots=shots.filter(s=>s.y>-20);
+}
+
+
+function zombieDraw(){
+
+ ctx.fillStyle="#171717";
+ ctx.fillRect(0,0,560,420);
+
+ ctx.fillStyle="#00e676";
+ ctx.fillRect(player.x,player.y,player.w,player.h);
+
+ ctx.fillStyle="#76ff03";
+
+ zombies.forEach(z=>{
+
+   ctx.beginPath();
+   ctx.arc(z.x+14,z.y+14,14,0,Math.PI*2);
+   ctx.fill();
+ });
+
+ ctx.fillStyle="#ffeb3b";
+
+ shots.forEach(s=>
+   ctx.fillRect(s.x,s.y,5,10)
+ );
+}
+
+
+/* =========================
+⚽ PENALTY SHOOTOUT
+========================= */
+
+let goalX;
+let goalY;
+let shotX;
+let shotY;
+let goalkeeper;
+
+function penaltyStart(){
+
+ document.getElementById("gameTitle").textContent="⚽ PENALTY SHOOTOUT";
+
+ score=0;
+
+ document.getElementById("score").textContent=0;
+
+ document.getElementById("controls").innerHTML=
+ `<button onclick="shootLeft()">⬅️</button>
+  <button onclick="shootMiddle()">⚽</button>
+  <button onclick="shootRight()">➡️</button>`;
+
+ penaltyReset();
+}
+
+
+function penaltyReset(){
+
+ goalX=280;
+ goalY=100;
+
+ shotX=280;
+ shotY=350;
+
+ goalkeeper=
+   Math.floor(Math.random()*3);
+}
+
+
+function shootLeft(){
+ penaltyShoot(0);
+}
+
+function shootMiddle(){
+ penaltyShoot(1);
+}
+
+function shootRight(){
+ penaltyShoot(2);
+}
+
+
+function penaltyShoot(direction){
+
+ let saved=direction===goalkeeper;
+
+ if(saved){
+
+   document.getElementById("message").textContent=
+     "🧤 SAVED! Try again!";
+   lives--;
+
+ }else{
+
+   score++;
+
+   document.getElementById("message").textContent=
+     "⚽ GOAL!!!";
+
+ }
+
+ document.getElementById("score").textContent=score;
+ document.getElementById("lives").textContent=lives;
+
+ if(lives<=0){
+
+   document.getElementById("message").textContent=
+     "🏁 Shootout finished!";
+
+   return;
+ }
+
+ setTimeout(penaltyReset,500);
+}
+
+
+function penaltyDraw(){
+
+ /* Not used because penalty is button based */
+}
+
+
+/* =========================
+KEYBOARD SUPPORT
+========================= */
+
+document.addEventListener("keydown",e=>{
+
+ if(e.key==="ArrowLeft")keys.left=true;
+ if(e.key==="ArrowRight")keys.right=true;
+ if(e.key==="ArrowUp")keys.up=true;
+ if(e.key==="ArrowDown")keys.down=true;
+ if(e.code==="Space"){
+
+   if(game==="space")fireBullet();
+   if(game==="zombie")shoot();
+   if(game==="runner")jump();
+ }
+});
+
+
+document.addEventListener("keyup",e=>{
+
+ if(e.key==="ArrowLeft")keys.left=false;
+ if(e.key==="ArrowRight")keys.right=false;
+ if(e.key==="ArrowUp")keys.up=false;
+ if(e.key==="ArrowDown")keys.down=false;
+});
+
+
+/* Fix collision helper */
+
+function collision(a,b){
+
+ return (
+   a.x < b.x+b.w &&
+   a.x+a.w > b.x &&
+   a.y < b.y+b.h &&
+   a.y+a.h > b.y
+ );
 }
 
 </script>
