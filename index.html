@@ -1,203 +1,446 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fun Zone 🎮</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #6a5acd, #00bfff);
-      color: white;
-    }
+<title>Fun Zone 🎮</title>
 
-    header {
-      padding: 30px 10px;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      font-size: 45px;
-      margin: 10px;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #6a5acd, #00bfff);
+  color: white;
+  min-height: 100vh;
+}
 
-    .subtitle {
-      font-size: 18px;
-    }
+header {
+  padding: 30px 10px 15px;
+}
 
-    .games {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
+h1 {
+  font-size: 42px;
+  margin: 10px;
+}
 
-    .game {
-      background: white;
-      color: #333;
-      width: 250px;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
+.subtitle {
+  font-size: 18px;
+}
 
-    button {
-      border: none;
-      padding: 12px 20px;
-      border-radius: 12px;
-      background: #6a5acd;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.games {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
 
-    button:hover {
-      transform: scale(1.05);
-    }
+.game {
+  background: white;
+  color: #333;
+  width: 270px;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
 
-    #gameArea {
-      display: none;
-      background: white;
-      color: #333;
-      margin: 20px auto;
-      padding: 25px;
-      width: 85%;
-      max-width: 500px;
-      border-radius: 20px;
-    }
+.game h2 {
+  margin-top: 5px;
+}
 
-    #target {
-      width: 60px;
-      height: 60px;
-      background: red;
-      border-radius: 50%;
-      position: relative;
-      margin: 30px auto;
-      cursor: pointer;
-    }
-  </style>
+button {
+  border: none;
+  padding: 12px 20px;
+  margin: 6px;
+  border-radius: 12px;
+  background: #6a5acd;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.gameScreen {
+  display: none;
+  background: white;
+  color: #333;
+  margin: 20px auto;
+  padding: 25px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Tap Target */
+#target {
+  width: 60px;
+  height: 60px;
+  background: red;
+  border-radius: 50%;
+  position: relative;
+  margin: 30px auto;
+  cursor: pointer;
+}
+
+/* Reaction Game */
+#reactionBox {
+  width: 100%;
+  height: 200px;
+  background: #777;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Number Guess */
+input {
+  padding: 12px;
+  width: 150px;
+  border: 2px solid #6a5acd;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🎮 FUN ZONE 🎮</h1>
-    <p class="subtitle">Play games. Have fun. Beat your score!</p>
-  </header>
+<header>
+  <h1>🎮 FUN ZONE 🎮</h1>
+  <p class="subtitle">Play games. Have fun. Beat your scores!</p>
+</header>
 
-  <div class="games">
+<!-- MAIN MENU -->
 
-    <div class="game">
-      <h2>🎯 Tap the Target</h2>
-      <p>How fast can you tap?</p>
-      <button onclick="startGame()">PLAY</button>
-    </div>
+<div class="games" id="menu">
 
-
-        <div class="game">
-  <h2>🧠 Quiz Game</h2>
-  <p>Test your brain!</p>
-
-  <button onclick="document.getElementById('quizGame').style.display='block'">
-    PLAY
-  </button>
-        </div>
-      </button>
-    </div>
-
-    <div class="game">
-      <h2>🏆 Your Score</h2>
-      <p id="bestScore">Best: 0</p>
-    </div>
-
+  <div class="game">
+    <h2>🎯 Tap the Target</h2>
+    <p>Tap the target as many times as you can!</p>
+    <button onclick="openGame('targetGame')">PLAY</button>
   </div>
 
-  <div id="gameArea">
-
-    <h2>🎯 TAP THE TARGET!</h2>
-
-    <p>Score: <span id="score">0</span></p>
-
-    <div id="target" onclick="hitTarget()"></div>
-
-    <button onclick="closeGame()">EXIT GAME</button>
-
+  <div class="game">
+    <h2>🧠 Quiz Game</h2>
+    <p>Test your brain with quick questions!</p>
+    <button onclick="openGame('quizGame')">PLAY</button>
   </div>
 
-  <script>
+  <div class="game">
+    <h2>🪨 Rock Paper Scissors</h2>
+    <p>Can you beat the computer?</p>
+    <button onclick="openGame('rpsGame')">PLAY</button>
+  </div>
 
-    let score = 0;
-    let best = 0;
+  <div class="game">
+    <h2>⚡ Reaction Game</h2>
+    <p>Test how fast you can react!</p>
+    <button onclick="openReactionGame()">PLAY</button>
+  </div>
 
-    function startGame() {
-      score = 0;
+  <div class="game">
+    <h2>🔢 Number Guessing</h2>
+    <p>Guess the secret number!</p>
+    <button onclick="openNumberGame()">PLAY</button>
+  </div>
 
-      document.getElementById("score").textContent = score;
-      document.getElementById("gameArea").style.display = "block";
+  <div class="game">
+    <h2>🏆 Your Scores</h2>
+    <p>Target: <span id="bestTarget">0</span></p>
+    <p>Quiz: <span id="bestQuiz">0</span></p>
+    <p>RPS Wins: <span id="bestRPS">0</span></p>
+    <p>Reaction: <span id="bestReaction">--</span></p>
+  </div>
 
-      moveTarget();
-    }
-
-    function hitTarget() {
-      score++;
-
-      document.getElementById("score").textContent = score;
-
-      if (score > best) {
-        best = score;
-        best = score;
-        document.getElementById("bestScore").textContent =
-          "Best: " + best;
-      }
-
-      moveTarget();
-    }
-
-    function moveTarget() {
-
-      let target = document.getElementById("target");
-
-      let x = Math.random() * 250 - 125;
-      let y = Math.random() * 150 - 75;
-
-      target.style.transform =
-        "translate(" + x + "px," + y + "px)";
-    }
-
-    function closeGame() {
-      document.getElementById("gameArea").style.display = "none";
-    }
-
-  </script>
-<button onclick="document.getElementById('quizGame').style.display='none'">
-  BACK
-  </button><div id="quizGame" style="display:none;">
-  <h2>🧠 Quiz Game</h2>
-  <p id="question">What is 5 + 5?</p>
-
-  <button onclick="answer('10')">10</button>
-  <button onclick="answer('15')">15</button>
-  <button onclick="answer('20')">20</button>
-
-  <p id="quizResult"></p>
 </div>
 
+
+<!-- TAP THE TARGET -->
+
+<div class="gameScreen" id="targetGame">
+
+  <h2>🎯 TAP THE TARGET!</h2>
+
+  <p>Score: <span id="targetScore">0</span></p>
+
+  <div id="target" onclick="hitTarget()"></div>
+
+  <button onclick="startTarget()">START</button>
+
+  <button onclick="backToMenu()">BACK</button>
+
+</div>
+
+
+<!-- QUIZ GAME -->
+
+<div class="gameScreen" id="quizGame">
+
+  <h2>🧠 QUIZ GAME</h2>
+
+  <p id="question">What is 5 + 5?</p>
+
+  <button onclick="answer(10)">10</button>
+  <button onclick="answer(15)">15</button>
+  <button onclick="answer(20)">20</button>
+
+  <p id="quizResult"></p>
+
+  <p>Score: <span id="quizScore">0</span></p>
+
+  <button onclick="nextQuestion()">NEXT QUESTION</button>
+
+  <br>
+
+  <button onclick="backToMenu()">BACK</button>
+
+</div>
+
+
+<!-- ROCK PAPER SCISSORS -->
+
+<div class="gameScreen" id="rpsGame">
+
+  <h2>🪨📄✂️ ROCK PAPER SCISSORS</h2>
+
+  <p>Choose one:</p>
+
+  <button onclick="playRPS('Rock')">🪨 Rock</button>
+
+  <button onclick="playRPS('Paper')">📄 Paper</button>
+
+  <button onclick="playRPS('Scissors')">✂️ Scissors</button>
+
+  <p id="rpsResult"></p>
+
+  <p>Your wins: <span id="rpsScore">0</span></p>
+
+  <button onclick="backToMenu()">BACK</button>
+
+</div>
+
+
+<!-- REACTION GAME -->
+
+<div class="gameScreen" id="reactionGame">
+
+  <h2>⚡ REACTION GAME</h2>
+
+  <p id="reactionMessage">Press START and wait...</p>
+
+  <div id="reactionBox" onclick="reactionClick()">
+    WAIT
+  </div>
+
+  <p>Your time: <span id="reactionTime">--</span> ms</p>
+
+  <button onclick="startReaction()">START</button>
+
+  <button onclick="backToMenu()">BACK</button>
+
+</div>
+
+
+<!-- NUMBER GUESSING GAME -->
+
+<div class="gameScreen" id="numberGame">
+
+  <h2>🔢 NUMBER GUESSING</h2>
+
+  <p>I'm thinking of a number from 1 to 100.</p>
+
+  <input type="number" id="guessInput" placeholder="Enter number">
+
+  <br>
+
+  <button onclick="makeGuess()">GUESS</button>
+
+  <p id="guessResult"></p>
+
+  <p>Attempts: <span id="attempts">0</span></p>
+
+  <button onclick="newNumberGame()">NEW NUMBER</button>
+
+  <button onclick="backToMenu()">BACK</button>
+
+</div>
+
+
 <script>
+
+/* =========================
+   MENU
+========================= */
+
+function openGame(gameID) {
+
+  document.getElementById("menu").style.display = "none";
+
+  document.querySelectorAll(".gameScreen").forEach(function(game) {
+    game.style.display = "none";
+  });
+
+  document.getElementById(gameID).style.display = "block";
+}
+
+
+function backToMenu() {
+
+  document.querySelectorAll(".gameScreen").forEach(function(game) {
+    game.style.display = "none";
+  });
+
+  document.getElementById("menu").style.display = "flex";
+}
+
+
+/* =========================
+   TAP THE TARGET
+========================= */
+
+let targetScore = 0;
+let bestTarget = 0;
+
+function startTarget() {
+
+  targetScore = 0;
+
+  document.getElementById("targetScore").textContent = targetScore;
+
+  moveTarget();
+}
+
+
+function hitTarget() {
+
+  targetScore++;
+
+  document.getElementById("targetScore").textContent = targetScore;
+
+  if (targetScore > bestTarget) {
+
+    bestTarget = targetScore;
+
+    document.getElementById("bestTarget").textContent = bestTarget;
+  }
+
+  moveTarget();
+}
+
+
+function moveTarget() {
+
+  let target = document.getElementById("target");
+
+  let x = Math.random() * 250 - 125;
+
+  let y = Math.random() * 150 - 75;
+
+  target.style.transform =
+    "translate(" + x + "px," + y + "px)";
+}
+
+
+/* =========================
+   QUIZ GAME
+========================= */
+
 let quizScore = 0;
+let quizQuestion = 0;
+
+let questions = [
+
+  {
+    question: "What is 5 + 5?",
+    options: [10, 15, 20],
+    answer: 10
+  },
+
+  {
+    question: "What is the capital of Nigeria?",
+    options: ["Abuja", "Lagos", "Kano"],
+    answer: "Abuja"
+  },
+
+  {
+    question: "How many sides does a triangle have?",
+    options: [3, 4, 5],
+    answer: 3
+  },
+
+  {
+    question: "What is 10 × 2?",
+    options: [10, 20, 30],
+    answer: 20
+  },
+
+  {
+    question: "Which planet do we live on?",
+    options: ["Mars", "Earth", "Jupiter"],
+    answer: "Earth"
+  }
+
+];
+
 
 function answer(choice) {
-  if (choice === "10") {
+
+  let correct = questions[quizQuestion].answer;
+
+  if (choice === correct) {
+
     quizScore++;
+
     document.getElementById("quizResult").textContent =
-      "🎉 Correct! Score: " + quizScore;
+      "🎉 Correct!";
+
   } else {
+
     document.getElementById("quizResult").textContent =
-      "❌ Not quite! Try again.";
+      "❌ Wrong!";
+
   }
+
+  document.getElementById("quizScore").textContent = quizScore;
 }
-  </script>
-</body>
-</html>
+
+
+function nextQuestion() {
+
+  quizQuestion++;
+
+  if (quizQuestion >= questions.length) {
+
+    document.getElementById("question").textContent =
+      "🎉 Quiz finished!";
+
+    document.getElementById("quizResult").textContent =
+      "Final Score: " + quizScore + "/" + questions.length;
+
+    document.getElementById("bestQuiz").textContent = quizScore;
+
+    return;
+  }
+
+  showQuestion();
+}
+
+
+function showQuestion() {
+
+  let q = questions[quizQuestion
