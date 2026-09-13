@@ -2,1182 +2,999 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>FUN ZONE 🎮</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#111827">
+<title>Fun Zone</title>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
+*{box-sizing:border-box}
 body{
- margin:0;
- min-height:100vh;
- font-family:Arial,sans-serif;
- color:white;
- background:
- radial-gradient(circle at top,#263b91 0,#090d29 45%,#02030d 100%);
- text-align:center;
- overflow-x:hidden;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#080b16;
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
 }
+button{
+  border:0;
+  border-radius:14px;
+  padding:14px 20px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  color:white;
+  background:#2563eb;
+  touch-action:none;
+}
+button:active{transform:scale(.94)}
+#splash{
+  position:fixed;
+  inset:0;
+  background:#080b16;
+  z-index:999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.logo{
+  width:100px;
+  height:100px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:55px;
+  box-shadow:0 0 40px #2563eb;
+}
+#splash h1{font-size:34px;margin:20px 0 5px}
+#splash p{opacity:.7}
 
 header{
- padding:35px 15px 15px;
+  padding:25px 15px 10px;
 }
-
-.logo{
- font-size:52px;
- font-weight:900;
- margin:0;
- text-shadow:0 0 10px #00eaff,0 0 30px #0066ff;
+header h1{
+  margin:0;
+  font-size:38px;
+  background:linear-gradient(90deg,#38bdf8,#a855f7,#f472b6);
+  -webkit-background-clip:text;
+  color:transparent;
 }
+header p{opacity:.7}
 
-.tag{
- color:#bdefff;
- margin-top:5px;
+#home{
+  max-width:900px;
+  margin:auto;
+  padding:15px;
 }
-
 .games{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
- gap:18px;
- max-width:1000px;
- margin:auto;
- padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:15px;
 }
-
-.card{
- position:relative;
- overflow:hidden;
- padding:25px 18px;
- min-height:220px;
- border-radius:24px;
- background:linear-gradient(145deg,#ffffff18,#ffffff08);
- border:1px solid #ffffff30;
- box-shadow:0 15px 35px #0008;
- backdrop-filter:blur(10px);
- transition:.2s;
+.gameCard{
+  min-height:145px;
+  padding:20px 10px;
+  border-radius:20px;
+  background:#111827;
+  border:1px solid #263044;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  transition:.2s;
 }
-
-.card:active{
- transform:scale(.97);
-}
-
-.icon{
- font-size:55px;
- margin:8px;
-}
-
-.card h2{
- margin:8px;
-}
-
-.card p{
- color:#cbd5ff;
- min-height:42px;
-}
-
-.play{
- width:90%;
- background:linear-gradient(90deg,#6c35ff,#00a8ff);
- box-shadow:0 5px 20px #0066ff66;
-}
+.gameCard:active{transform:scale(.96)}
+.gameIcon{font-size:48px}
+.gameName{font-size:18px;font-weight:bold;margin:10px 0}
 
 #gameScreen{
- display:none;
- width:96%;
- max-width:700px;
- margin:15px auto 30px;
- padding:15px;
+  display:none;
+  max-width:700px;
+  margin:auto;
+  padding:15px;
 }
-
-.topbar{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:5px;
- margin-bottom:8px;
+#gameTitle{font-size:28px;margin:10px}
+#info{
+  font-size:18px;
+  margin:8px;
 }
-
-.topbar button{
- margin:0;
- padding:9px 13px;
+#gameArea{
+  position:relative;
+  width:100%;
+  max-width:600px;
+  height:430px;
+  margin:10px auto;
+  background:#050816;
+  border:2px solid #263044;
+  border-radius:18px;
+  overflow:hidden;
 }
-
-.stats{
- display:flex;
- justify-content:space-around;
- background:#ffffff12;
- border:1px solid #ffffff25;
- border-radius:15px;
- padding:10px;
- margin-bottom:10px;
- font-weight:bold;
-}
-
-canvas{
- width:100%;
- max-width:650px;
- aspect-ratio:4/3;
- display:block;
- margin:auto;
- border-radius:18px;
- background:#050817;
- border:2px solid #ffffff20;
- box-shadow:0 10px 35px #0009;
- touch-action:none;
-}
-
 .controls{
- display:flex;
- flex-wrap:wrap;
- justify-content:center;
- gap:8px;
- margin-top:12px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:12px auto;
+  max-width:500px;
+}
+.control{
+  min-width:75px;
+  min-height:55px;
+  background:#1d4ed8;
+}
+.topButtons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.homeBtn{background:#475569}
+.restartBtn{background:#9333ea}
+
+/* Racer */
+.racerPlayer,.racerEnemy{
+  position:absolute;
+  width:42px;
+  height:70px;
+  border-radius:10px;
+}
+.racerPlayer{background:#22c55e}
+.racerEnemy{background:#ef4444}
+.roadLine{
+  position:absolute;
+  width:7px;
+  height:55px;
+  background:white;
+  opacity:.7;
 }
 
-button{
- border:0;
- color:white;
- font-weight:bold;
- font-size:16px;
- padding:13px 18px;
- border-radius:14px;
- background:linear-gradient(135deg,#6547ff,#008cff);
- box-shadow:0 5px 15px #0006;
- cursor:pointer;
+/* Breaker */
+#breakerCanvas,#spaceCanvas,#runnerCanvas,#zombieCanvas{
+  width:100%;
+  height:100%;
 }
 
-button:active{
- transform:scale(.92);
+/* Maze */
+#maze{
+  display:grid;
+  width:300px;
+  height:300px;
+  margin:40px auto;
+  border:4px solid #64748b;
+}
+.cell{background:#172033}
+.wall{background:#020617}
+.player{background:#22c55e}
+.goal{background:#eab308}
+
+/* Penalty */
+.goalPost{
+  position:absolute;
+  top:70px;
+  left:10%;
+  width:80%;
+  height:180px;
+  border:8px solid white;
+  border-bottom:0;
+}
+.keeper{
+  position:absolute;
+  top:155px;
+  left:47%;
+  width:35px;
+  height:75px;
+  background:#ef4444;
+  border-radius:12px;
+}
+.ball{
+  position:absolute;
+  bottom:35px;
+  left:47%;
+  width:28px;
+  height:28px;
+  background:white;
+  border-radius:50%;
 }
 
-.big{
- min-width:90px;
- min-height:55px;
- font-size:22px;
+.message{
+  font-size:20px;
+  font-weight:bold;
+  margin:12px;
+  min-height:25px;
 }
 
-.homeBtn{
- background:#30354f;
-}
-
-#message{
- min-height:25px;
- font-weight:bold;
- color:#fff;
-}
-
-footer{
- padding:20px;
- color:#9da8d0;
+@media(max-width:450px){
+  #gameArea{height:390px}
+  header h1{font-size:32px}
+  .gameCard{min-height:130px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HOME -->
+<div id="splash">
+  <div class="logo">🎮</div>
+  <h1>FUN ZONE</h1>
+  <p>Play. Challenge. Have Fun.</p>
+</div>
 
-<div id="home">
-
-<header>
-<h1 class="logo">🎮 FUN ZONE</h1>
-<p class="tag">REAL ARCADE • REAL CHALLENGES • HAVE FUN</p>
+<header id="mainHeader">
+  <h1>🎮 FUN ZONE</h1>
+  <p>Choose a game and start playing!</p>
 </header>
 
-<div class="games">
+<section id="home">
+  <div class="games">
 
-<div class="card">
-<div class="icon">🏎️</div>
-<h2>Neon Racer</h2>
-<p>Dodge traffic, collect coins and survive the highway.</p>
-<button class="play" onclick="startGame('racer')">PLAY NOW</button>
-</div>
+    <div class="gameCard" onclick="openGame('racer')">
+      <div class="gameIcon">🏎️</div>
+      <div class="gameName">Neon Racer</div>
+      <button>PLAY</button>
+    </div>
 
-<div class="card">
-<div class="icon">🧱</div>
-<h2>Block Breaker</h2>
-<p>Control the paddle and destroy every block.</p>
-<button class="play" onclick="startGame('breaker')">PLAY NOW</button>
-</div>
+    <div class="gameCard" onclick="openGame('breaker')">
+      <div class="gameIcon">🧱</div>
+      <div class="gameName">Block Breaker</div>
+      <button>PLAY</button>
+    </div>
 
-<div class="card">
-<div class="icon">👾</div>
-<h2>Space Defender</h2>
-<p>Fight through enemy waves and protect your ship.</p>
-<button class="play" onclick="startGame('space')">PLAY NOW</button>
-</div>
+    <div class="gameCard" onclick="openGame('space')">
+      <div class="gameIcon">👾</div>
+      <div class="gameName">Space Defender</div>
+      <button>PLAY</button>
+    </div>
 
-<div class="card">
-<div class="icon">🏃</div>
-<h2>Sky Runner</h2>
-<p>Run through the city and jump over obstacles.</p>
-<button class="play" onclick="startGame('runner')">PLAY NOW</button>
-</div>
+    <div class="gameCard" onclick="openGame('runner')">
+      <div class="gameIcon">🏃</div>
+      <div class="gameName">Sky Runner</div>
+      <button>PLAY</button>
+    </div>
 
-<div class="card">
-<div class="icon">🧩</div>
-<h2>Maze Escape</h2>
-<p>Find the exit before time runs out.</p>
-<button class="play" onclick="startGame('maze')">PLAY NOW</button>
-</div>
+    <div class="gameCard" onclick="openGame('maze')">
+      <div class="gameIcon">🧩</div>
+      <div class="gameName">Maze Escape</div>
+      <button>PLAY</button>
+    </div>
 
-<div class="card">
-<div class="icon">🧟</div>
-<h2>Zombie Survival</h2>
-<p>Survive enemy waves and protect yourself.</p>
-<button class="play" onclick="startGame('zombie')">PLAY NOW</button>
-</div>
+    <div class="gameCard" onclick="openGame('zombie')">
+      <div class="gameIcon">🧟</div>
+      <div class="gameName">Zombie Survival</div>
+      <button>PLAY</button>
+    </div>
 
-<div class="card">
-<div class="icon">⚽</div>
-<h2>Penalty Shootout</h2>
-<p>Aim your shot and beat the goalkeeper.</p>
-<button class="play" onclick="startGame('penalty')">PLAY NOW</button>
-</div>
+    <div class="gameCard" onclick="openGame('penalty')">
+      <div class="gameIcon">⚽</div>
+      <div class="gameName">Penalty Shootout</div>
+      <button>PLAY</button>
+    </div>
 
-</div>
+  </div>
+</section>
 
-<footer>🔥 More games coming soon!</footer>
-</div>
+<section id="gameScreen">
 
+  <div class="topButtons">
+    <button class="homeBtn" onclick="goHome()">🏠 HOME</button>
+    <button class="restartBtn" onclick="restartGame()">🔄 RESTART</button>
+  </div>
 
-<!-- GAME -->
+  <h2 id="gameTitle"></h2>
+  <div id="info"></div>
 
-<div id="gameScreen">
+  <div id="gameArea"></div>
 
-<div class="topbar">
-<button onclick="goHome()">🏠 HOME</button>
-<h2 id="gameTitle">GAME</h2>
-<button onclick="restart()">🔄</button>
-</div>
+  <div id="message" class="message"></div>
 
-<div class="stats">
-<span>🏆 <span id="score">0</span></span>
-<span>❤️ <span id="lives">3</span></span>
-<span id="extra">LEVEL 1</span>
-</div>
+  <div id="controls" class="controls"></div>
 
-<canvas id="canvas" width="640" height="480"></canvas>
-
-<div id="controls" class="controls"></div>
-
-<p id="message"></p>
-
-</div>
-
+</section>
 
 <script>
+/* =========================
+   GLOBAL GAME SYSTEM
+========================= */
 
-/* =====================================================
-   ENGINE
-===================================================== */
+let currentGame="";
+let animationId=null;
+let gameRunning=false;
 
-const canvas=document.getElementById("canvas");
-const ctx=canvas.getContext("2d");
+const home=document.getElementById("home");
+const screen=document.getElementById("gameScreen");
+const area=document.getElementById("gameArea");
+const title=document.getElementById("gameTitle");
+const info=document.getElementById("info");
+const controls=document.getElementById("controls");
+const message=document.getElementById("message");
 
-let current="";
-let running=false;
-let score=0;
-let lives=3;
-let level=1;
-let last=0;
-let raf=0;
-let keys={};
-
-function startGame(type){
-
- current=type;
- running=true;
- score=0;
- lives=3;
- level=1;
- keys={};
-
- document.getElementById("home").style.display="none";
- document.getElementById("gameScreen").style.display="block";
-
- document.getElementById("score").textContent=0;
- document.getElementById("lives").textContent=3;
- document.getElementById("message").textContent="";
-
- cancelAnimationFrame(raf);
-
- if(type==="racer") racerStart();
- if(type==="breaker") breakerStart();
- if(type==="space") spaceStart();
- if(type==="runner") runnerStart();
- if(type==="maze") mazeStart();
- if(type==="zombie") zombieStart();
- if(type==="penalty") penaltyStart();
-
- last=performance.now();
- raf=requestAnimationFrame(loop);
+function clearGame(){
+  if(animationId) cancelAnimationFrame(animationId);
+  animationId=null;
+  gameRunning=false;
+  area.innerHTML="";
+  controls.innerHTML="";
+  message.textContent="";
 }
 
-function restart(){
- startGame(current);
+function openGame(game){
+  clearGame();
+  currentGame=game;
+  home.style.display="none";
+  document.getElementById("mainHeader").style.display="none";
+  screen.style.display="block";
+
+  if(game==="racer") startRacer();
+  if(game==="breaker") startBreaker();
+  if(game==="space") startSpace();
+  if(game==="runner") startRunner();
+  if(game==="maze") startMaze();
+  if(game==="zombie") startZombie();
+  if(game==="penalty") startPenalty();
 }
 
 function goHome(){
-
- running=false;
- cancelAnimationFrame(raf);
-
- document.getElementById("gameScreen").style.display="none";
- document.getElementById("home").style.display="block";
+  clearGame();
+  screen.style.display="none";
+  home.style.display="block";
+  document.getElementById("mainHeader").style.display="block";
 }
 
-function loop(t){
-
- if(!running)return;
-
- let dt=Math.min((t-last)/16.67,2);
- last=t;
-
- update(dt);
- draw();
-
- raf=requestAnimationFrame(loop);
+function restartGame(){
+  if(currentGame) openGame(currentGame);
 }
 
-function update(dt){
-
- if(current==="racer")racerUpdate(dt);
- if(current==="breaker")breakerUpdate(dt);
- if(current==="space")spaceUpdate(dt);
- if(current==="runner")runnerUpdate(dt);
- if(current==="maze")mazeUpdate(dt);
- if(current==="zombie")zombieUpdate(dt);
- if(current==="penalty")penaltyUpdate(dt);
+function makeButton(text,fn){
+  const b=document.createElement("button");
+  b.className="control";
+  b.textContent=text;
+  b.addEventListener("pointerdown",e=>{
+    e.preventDefault();
+    fn();
+  });
+  controls.appendChild(b);
+  return b;
 }
 
-function draw(){
+/* =========================
+   1. NEON RACER
+========================= */
 
- ctx.clearRect(0,0,640,480);
+let racerX,racerEnemies,racerScore,racerLives,racerSpeed;
 
- if(current==="racer")racerDraw();
- if(current==="breaker")breakerDraw();
- if(current==="space")spaceDraw();
- if(current==="runner")runnerDraw();
- if(current==="maze")mazeDraw();
- if(current==="zombie")zombieDraw();
- if(current==="penalty")penaltyDraw();
+function startRacer(){
+  title.textContent="🏎️ Neon Racer";
+  info.textContent="Dodge the red cars!";
+  area.innerHTML="";
+  racerScore=0;
+  racerLives=3;
+  racerX=50;
+  racerSpeed=4;
+  racerEnemies=[];
+
+  const player=document.createElement("div");
+  player.className="racerPlayer";
+  player.id="racerPlayer";
+  area.appendChild(player);
+
+  for(let i=0;i<4;i++){
+    const e=document.createElement("div");
+    e.className="racerEnemy";
+    e.style.left=(15+Math.random()*70)+"%";
+    e.style.top=(-100-i*130)+"px";
+    area.appendChild(e);
+    racerEnemies.push(e);
+  }
+
+  makeButton("⬅️",()=>racerMove(-7));
+  makeButton("➡️",()=>racerMove(7));
+
+  gameRunning=true;
+  racerLoop();
 }
 
-function stat(){
-
- document.getElementById("score").textContent=Math.floor(score);
- document.getElementById("lives").textContent=lives;
- document.getElementById("extra").textContent="LEVEL "+level;
+function racerMove(amount){
+  if(!gameRunning)return;
+  racerX=Math.max(5,Math.min(90,racerX+amount));
 }
 
-function finish(text){
+function racerLoop(){
+  if(!gameRunning)return;
 
- running=false;
+  const player=document.getElementById("racerPlayer");
+  player.style.left=racerX+"%";
+  player.style.bottom="20px";
 
- document.getElementById("message").textContent=
- text+" • Score: "+Math.floor(score);
+  racerEnemies.forEach(e=>{
+    let top=parseFloat(e.style.top);
+    top+=racerSpeed;
 
+    if(top>area.clientHeight){
+      top=-100-Math.random()*150;
+      e.style.left=(10+Math.random()*75)+"%";
+      racerScore++;
+      if(racerScore%10===0)racerSpeed+=.4;
+    }
+
+    e.style.top=top+"px";
+
+    if(collision(player,e)){
+      top=-120;
+      e.style.top=top+"px";
+      racerLives--;
+      message.textContent="💥 Crash!";
+      if(racerLives<=0){
+        gameRunning=false;
+        message.textContent="Game Over! Score: "+racerScore;
+      }
+    }
+  });
+
+  info.textContent="Score: "+racerScore+" | ❤️ "+racerLives;
+  animationId=requestAnimationFrame(racerLoop);
 }
 
+/* =========================
+   COLLISION
+========================= */
 
-/* =====================================================
-   CONTROLS
-===================================================== */
+function collision(a,b){
+  const r1=a.getBoundingClientRect();
+  const r2=b.getBoundingClientRect();
 
-function controls(html){
-
- document.getElementById("controls").innerHTML=html;
-
- document.querySelectorAll("[data-key]").forEach(b=>{
-
-   b.addEventListener("pointerdown",e=>{
-     e.preventDefault();
-     keys[b.dataset.key]=true;
-   });
-
-   b.addEventListener("pointerup",e=>{
-     e.preventDefault();
-     keys[b.dataset.key]=false;
-   });
-
-   b.addEventListener("pointercancel",()=>{
-     keys[b.dataset.key]=false;
-   });
-
-   b.addEventListener("pointerleave",()=>{
-     keys[b.dataset.key]=false;
-   });
- });
+  return !(
+    r1.right<r2.left ||
+    r1.left>r2.right ||
+    r1.bottom<r2.top ||
+    r1.top>r2.bottom
+  );
 }
 
-document.addEventListener("keydown",e=>{
+/* =========================
+   2. BLOCK BREAKER
+========================= */
 
- if(e.key==="ArrowLeft")keys.left=true;
- if(e.key==="ArrowRight")keys.right=true;
- if(e.key==="ArrowUp")keys.up=true;
- if(e.key==="ArrowDown")keys.down=true;
- if(e.code==="Space"){
-   keys.space=true;
-   if(current==="runner")jump();
-   if(current==="space")fire();
-   if(current==="zombie")shoot();
- }
-});
+let brCanvas,brCtx,brX,brY,brDX,brDY,brPaddle,brBlocks,brScore,brStarted;
 
-document.addEventListener("keyup",e=>{
+function startBreaker(){
+  title.textContent="🧱 Block Breaker";
+  info.textContent="Break all the blocks!";
+  area.innerHTML="";
 
- if(e.key==="ArrowLeft")keys.left=false;
- if(e.key==="ArrowRight")keys.right=false;
- if(e.key==="ArrowUp")keys.up=false;
- if(e.key==="ArrowDown")keys.down=false;
- if(e.code==="Space")keys.space=false;
-});
+  brCanvas=document.createElement("canvas");
+  brCanvas.width=600;
+  brCanvas.height=430;
+  brCanvas.id="breakerCanvas";
+  area.appendChild(brCanvas);
 
-function rectHit(a,b){
+  brCtx=brCanvas.getContext("2d");
 
- return a.x<b.x+b.w &&
- a.x+a.w>b.x &&
- a.y<b.y+b.h &&
- a.y+a.h>b.y;
+  brPaddle=250;
+  brX=300;
+  brY=350;
+  brDX=4;
+  brDY=-4;
+  brScore=0;
+  brStarted=false;
+
+  brBlocks=[];
+
+  for(let row=0;row<4;row++){
+    for(let col=0;col<8;col++){
+      brBlocks.push({
+        x:20+col*70,
+        y:35+row*30,
+        alive:true
+      });
+    }
+  }
+
+  makeButton("⬅️",()=>brPaddle=Math.max(0,brPaddle-30));
+  makeButton("▶️ START",()=>{if(!brStarted){brStarted=true;breakerLoop()}});
+  makeButton("➡️",()=>brPaddle=Math.min(500,brPaddle+30));
+
+  drawBreaker();
 }
 
+function drawBreaker(){
+  brCtx.clearRect(0,0,600,430);
 
-/* =====================================================
-   🏎️ NEON RACER
-===================================================== */
+  brCtx.fillStyle="#38bdf8";
+  brCtx.fillRect(brPaddle,395,100,15);
 
-let car;
-let traffic=[];
-let coins=[];
-let roadScroll=0;
-let racerSpeed=5;
-let racerSpawn=0;
+  brCtx.beginPath();
+  brCtx.arc(brX,brY,9,0,Math.PI*2);
+  brCtx.fillStyle="white";
+  brCtx.fill();
 
-function racerStart(){
-
- document.getElementById("gameTitle").textContent="🏎️ NEON RACER";
-
- car={x:300,y:385,w:40,h:65};
-
- traffic=[];
- coins=[];
- roadScroll=0;
- racerSpeed=5;
- racerSpawn=0;
-
- controls(`
- <button class="big" data-key="left">⬅️</button>
- <button class="big" data-key="right">➡️</button>
- `);
+  brBlocks.forEach(b=>{
+    if(b.alive){
+      brCtx.fillStyle="#a855f7";
+      brCtx.fillRect(b.x,b.y,60,20);
+    }
+  });
 }
 
-function racerUpdate(dt){
+function breakerLoop(){
+  if(!gameRunning && currentGame!=="breaker")return;
 
- if(keys.left)car.x-=7*dt;
- if(keys.right)car.x+=7*dt;
+  brX+=brDX;
+  brY+=brDY;
 
- car.x=Math.max(135,Math.min(465,car.x));
+  if(brX<9||brX>591)brDX*=-1;
+  if(brY<9)brDY*=-1;
 
- roadScroll+=racerSpeed*dt;
- racerSpawn-=dt;
+  if(brY>385 && brX>brPaddle && brX<brPaddle+100){
+    brDY=-Math.abs(brDY);
+  }
 
- if(racerSpawn<=0){
+  if(brY>440){
+    message.textContent="Game Over! Score: "+brScore;
+    brStarted=false;
+    drawBreaker();
+    return;
+  }
 
-   racerSpawn=.75;
+  brBlocks.forEach(b=>{
+    if(b.alive &&
+      brX>b.x &&
+      brX<b.x+60 &&
+      brY>b.y &&
+      brY<b.y+20
+    ){
+      b.alive=false;
+      brDY*=-1;
+      brScore++;
+    }
+  });
 
-   traffic.push({
-     x:145+Math.random()*310,
-     y:-80,
-     w:40,
-     h:65,
-     speed:racerSpeed*(.8+Math.random()*.4)
-   });
+  if(brScore===brBlocks.length){
+    message.textContent="🎉 YOU WIN!";
+    brStarted=false;
+    drawBreaker();
+    return;
+  }
 
-   if(Math.random()<.65){
+  info.textContent="Score: "+brScore;
+  drawBreaker();
 
-     coins.push({
-       x:145+Math.random()*310,
-       y:-120,
-       r:9
-     });
-   }
- }
-
- traffic.forEach(o=>{
-   o.y+=o.speed*dt;
-
-   if(rectHit(car,o)){
-
-     o.y=600;
-     lives--;
-     stat();
-
-     if(lives<=0)finish("💥 CRASH!");
-   }
- });
-
- coins.forEach(c=>{
-   c.y+=racerSpeed*dt;
-
-   let dx=car.x+20-c.x;
-   let dy=car.y+30-c.y;
-
-   if(Math.sqrt(dx*dx+dy*dy)<28){
-
-     c.y=600;
-     score+=10;
-     stat();
-   }
- });
-
- traffic=traffic.filter(o=>o.y<550);
- coins=coins.filter(c=>c.y<550);
-
- score+=.025*dt*racerSpeed;
- stat();
-
- if(score>100)level=2;
- if(score>250)level=3;
-
- racerSpeed=5+level*.8;
+  animationId=requestAnimationFrame(breakerLoop);
 }
 
-function racerDraw(){
+/* =========================
+   3. SPACE DEFENDER
+========================= */
 
- /* sky */
- ctx.fillStyle="#071326";
- ctx.fillRect(0,0,640,480);
+let spCanvas,spCtx,spX,spBullets,spEnemies,spScore,spLives,spLastShot;
 
- /* road */
- ctx.fillStyle="#303238";
- ctx.fillRect(110,0,420,480);
+function startSpace(){
+  title.textContent="👾 Space Defender";
+  info.textContent="Move and shoot the aliens!";
+  area.innerHTML="";
 
- /* roadside */
- ctx.fillStyle="#13a06b";
- ctx.fillRect(0,0,110,480);
- ctx.fillRect(530,0,110,480);
+  spCanvas=document.createElement("canvas");
+  spCanvas.width=600;
+  spCanvas.height=430;
+  spCanvas.id="spaceCanvas";
+  area.appendChild(spCanvas);
 
- /* road edges */
- ctx.fillStyle="#fff";
- ctx.fillRect(110,0,5,480);
- ctx.fillRect(525,0,5,480);
+  spCtx=spCanvas.getContext("2d");
 
- /* lane lines */
- ctx.fillStyle="#eee";
+  spX=280;
+  spBullets=[];
+  spEnemies=[];
+  spScore=0;
+  spLives=3;
+  spLastShot=0;
 
- let offset=roadScroll%70;
+  for(let i=0;i<7;i++){
+    spEnemies.push({
+      x:30+i*80,
+      y:30+Math.random()*80,
+      speed:1+Math.random()*1.5
+    });
+  }
 
- for(let y=-70+offset;y<480;y+=70){
+  makeButton("⬅️",()=>spX=Math.max(20,spX-25));
+  makeButton("🚀 FIRE",shootSpace);
+  makeButton("➡️",()=>spX=Math.min(550,spX+25));
 
-   ctx.fillRect(245,y,6,38);
-   ctx.fillRect(390,y,6,38);
- }
-
- /* traffic */
- traffic.forEach(o=>{
-   ctx.fillStyle="#e53935";
-   ctx.fillRect(o.x,o.y,o.w,o.h);
-
-   ctx.fillStyle="#bdefff";
-   ctx.fillRect(o.x+6,o.y+8,28,16);
-
-   ctx.fillStyle="#111";
-   ctx.fillRect(o.x-4,o.y+12,5,15);
-   ctx.fillRect(o.x+o.w,o.y+12,5,15);
- });
-
- /* coins */
- coins.forEach(c=>{
-   ctx.beginPath();
-   ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
-   ctx.fillStyle="#ffd600";
-   ctx.fill();
- });
-
- /* player */
- ctx.fillStyle="#00e5ff";
- ctx.fillRect(car.x,car.y,car.w,car.h);
-
- ctx.fillStyle="#17202a";
- ctx.fillRect(car.x+7,car.y+8,26,17);
-
- ctx.fillStyle="#ff1744";
- ctx.fillRect(car.x+5,car.y+52,9,6);
- ctx.fillRect(car.x+26,car.y+52,9,6);
+  gameRunning=true;
+  spaceLoop();
 }
 
-
-/* =====================================================
-   🧱 BLOCK BREAKER
-===================================================== */
-
-let paddle,ball,bricks;
-
-function breakerStart(){
-
- document.getElementById("gameTitle").textContent="🧱 BLOCK BREAKER";
-
- paddle={x:270,y:440,w:100,h:13};
-
- ball={
-   x:320,y:350,
-   dx:4,dy:-5,
-   r:9
- };
-
- bricks=[];
-
- for(let row=0;row<6;row++){
-
-   for(let col=0;col<9;col++){
-
-     bricks.push({
-       x:25+col*66,
-       y:45+row*27,
-       w:58,
-       h:19,
-       hp:row<2?2:1
-     });
-   }
- }
-
- controls(`
- <button class="big" data-key="left">⬅️</button>
- <button class="big" data-key="right">➡️</button>
- `);
+function shootSpace(){
+  if(!gameRunning)return;
+  spBullets.push({x:spX+20,y:375});
 }
 
-function breakerUpdate(dt){
+function spaceLoop(){
+  if(!gameRunning)return;
 
- if(keys.left)paddle.x-=8*dt;
- if(keys.right)paddle.x+=8*dt;
+  spCtx.clearRect(0,0,600,430);
 
- paddle.x=Math.max(0,Math.min(540,paddle.x));
+  /* player */
+  spCtx.fillStyle="#22c55e";
+  spCtx.fillRect(spX,390,45,20);
 
- ball.x+=ball.dx*dt;
- ball.y+=ball.dy*dt;
+  /* bullets */
+  spCtx.fillStyle="white";
+  spBullets.forEach(b=>{
+    b.y-=7;
+    spCtx.fillRect(b.x,b.y,5,14);
+  });
 
- if(ball.x<ball.r||ball.x>640-ball.r)
-   ball.dx*=-1;
+  /* enemies */
+  spEnemies.forEach(e=>{
+    e.y+=e.speed;
 
- if(ball.y<ball.r)
-   ball.dy=Math.abs(ball.dy);
+    spCtx.fillStyle="#ef4444";
+    spCtx.beginPath();
+    spCtx.arc(e.x,e.y,18,0,Math.PI*2);
+    spCtx.fill();
 
- if(rectHit(
-   {x:ball.x-ball.r,y:ball.y-ball.r,w:ball.r*2,h:ball.r*2},
-   paddle
- )){
-   ball.dy=-Math.abs(ball.dy);
+    if(e.y>430){
+      e.y=-30;
+      e.x=30+Math.random()*540;
+      spLives--;
+    }
+  });
 
-   let hitPos=(ball.x-(paddle.x+paddle.w/2))/(paddle.w/2);
-   ball.dx=hitPos*7;
- }
+  /* hits */
+  spBullets.forEach(b=>{
+    spEnemies.forEach(e=>{
+      if(Math.abs(b.x-e.x)<25 && Math.abs(b.y-e.y)<25){
+        e.y=-30;
+        e.x=30+Math.random()*540;
+        b.y=-100;
+        spScore++;
+      }
+    });
+  });
 
- bricks.forEach(b=>{
+  spBullets=spBullets.filter(b=>b.y>-30);
 
-   if(b.hp>0&&rectHit(
-     {x:ball.x-ball.r,y:ball.y-ball.r,w:ball.r*2,h:ball.r*2},
-     b
-   )){
+  info.textContent="Score: "+spScore+" | ❤️ "+spLives;
 
-     b.hp--;
-     ball.dy*=-1;
-     score+=b.hp===0?10:5;
-   }
- });
+  if(spLives<=0){
+    gameRunning=false;
+    message.textContent="Game Over! Score: "+spScore;
+    return;
+  }
 
- if(ball.y>490){
-
-   lives--;
-   stat();
-
-   if(lives<=0){
-     finish("💥 GAME OVER");
-   }else{
-     ball={x:320,y:350,dx:4,dy:-5};
-   }
- }
-
- if(bricks.every(b=>b.hp<=0)){
-
-   level++;
-
-   if(level>3){
-     finish("🏆 ALL LEVELS CLEARED!");
-   }else{
-
-     bricks.forEach(b=>b.hp=b.hp===0?1:b.hp);
-     ball.dx*=1.12;
-     ball.dy*=1.12;
-   }
- }
-
- stat();
+  animationId=requestAnimationFrame(spaceLoop);
 }
 
-function breakerDraw(){
+/* =========================
+   4. SKY RUNNER
+========================= */
 
- ctx.fillStyle="#070b20";
- ctx.fillRect(0,0,640,480);
+let runCanvas,runCtx,runY,runVelocity,runJumping,runObstacles,runCoins,runScore;
 
- /* glow lines */
- ctx.strokeStyle="#28356c";
+function startRunner(){
+  title.textContent="🏃 Sky Runner";
+  info.textContent="Jump over obstacles and collect coins!";
+  area.innerHTML="";
 
- for(let y=0;y<480;y+=40){
-   ctx.beginPath();
-   ctx.moveTo(0,y);
-   ctx.lineTo(640,y);
-   ctx.stroke();
- }
+  runCanvas=document.createElement("canvas");
+  runCanvas.width=600;
+  runCanvas.height=430;
+  runCanvas.id="runnerCanvas";
+  area.appendChild(runCanvas);
 
- bricks.forEach(b=>{
+  runCtx=runCanvas.getContext("2d");
 
-   if(b.hp>0){
+  runY=350;
+  runVelocity=0;
+  runJumping=false;
+  runObstacles=[];
+  runCoins=[];
+  runScore=0;
 
-     ctx.fillStyle=b.hp===2?"#ff7043":"#00bcd4";
-     ctx.fillRect(b.x,b.y,b.w,b.h);
+  for(let i=0;i<3;i++){
+    runObstacles.push({
+      x:600+i*250,
+      y:370,
+      w:35,
+      h:60
+    });
+  }
 
-     ctx.fillStyle="#ffffff55";
-     ctx.fillRect(b.x+4,b.y+3,b.w-8,4);
-   }
- });
+  for(let i=0;i<5;i++){
+    runCoins.push({
+      x:700+i*300,
+      y:260-Math.random()*100,
+      got:false
+    });
+  }
 
- ctx.fillStyle="#e8eaf6";
- ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
+  makeButton("⬆️ JUMP",jumpRunner);
 
- ctx.beginPath();
- ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);
- ctx.fillStyle="#ffeb3b";
- ctx.fill();
+  gameRunning=true;
+  runnerLoop();
 }
 
-
-/* =====================================================
-   👾 SPACE DEFENDER
-===================================================== */
-
-let ship,enemies,bullets,enemyBullets,fireTimer;
-
-function spaceStart(){
-
- document.getElementById("gameTitle").textContent="👾 SPACE DEFENDER";
-
- ship={x:300,y:420,w:40,h:25};
-
- enemies=[];
- bullets=[];
- enemyBullets=[];
- fireTimer=0;
-
- spawnWave();
-
- controls(`
- <button class="big" data-key="left">⬅️</button>
- <button class="big" id="fireButton">🚀 FIRE</button>
- <button class="big" data-key="right">➡️</button>
- `);
-
- document.getElementById("fireButton").onclick=fire;
+function jumpRunner(){
+  if(runY>=350){
+    runVelocity=-13;
+    runJumping=true;
+  }
 }
 
-function spawnWave(){
+function runnerLoop(){
+  if(!gameRunning)return;
 
- for(let i=0;i<8+level*2;i++){
+  runVelocity+=.65;
+  runY+=runVelocity;
 
-   enemies.push({
-     x:40+(i%8)*75,
-     y:50+Math.floor(i/8)*55,
-     w:35,
-     h:27,
-     dx:(Math.random()<.5?-1:1)*1.2
-   });
- }
+  if(runY>=350){
+    runY=350;
+    runVelocity=0;
+    runJumping=false;
+  }
+
+  runObstacles.forEach(o=>{
+    o.x-=5;
+
+    if(o.x<-50)o.x=650+Math.random()*250;
+
+    if(
+      o.x<100 &&
+      o.x+o.w>55 &&
+      runY+55>o.y
+    ){
+      gameRunning=false;
+      message.textContent="💥 You hit an obstacle! Score: "+runScore;
+    }
+  });
+
+  runCoins.forEach(c=>{
+    c.x-=5;
+
+    if(c.x<-30){
+      c.x=700+Math.random()*500;
+      c.got=false;
+    }
+
+    if(!c.got && Math.abs(c.x-75)<30 && Math.abs(c.y-(runY+25))<40){
+      c.got=true;
+      runScore++;
+    }
+  });
+
+  runCtx.clearRect(0,0,600,430);
+
+  /* ground */
+  runCtx.fillStyle="#334155";
+  runCtx.fillRect(0,405,600,25);
+
+  /* player */
+  runCtx.fillStyle="#38bdf8";
+  runCtx.fillRect(55,runY,45,55);
+
+  /* obstacles */
+  runCtx.fillStyle="#ef4444";
+  runObstacles.forEach(o=>{
+    runCtx.fillRect(o.x,o.y,o.w,o.h);
+  });
+
+  /* coins */
+  runCtx.fillStyle="#facc15";
+  runCoins.forEach(c=>{
+    if(!c.got){
+      runCtx.beginPath();
+      runCtx.arc(c.x,c.y,12,0,Math.PI*2);
+      runCtx.fill();
+    }
+  });
+
+  info.textContent="Coins: "+runScore;
+
+  if(gameRunning)
+    animationId=requestAnimationFrame(runnerLoop);
 }
 
-function fire(){
+/* =========================
+   5. MAZE ESCAPE
+========================= */
 
- bullets.push({
-   x:ship.x+18,
-   y:ship.y,
-   w:5,
-   h:16
- });
+let mazePlayer,mazePos;
+
+function startMaze(){
+  title.textContent="🧩 Maze Escape";
+  info.textContent="Reach the yellow square!";
+  area.innerHTML="";
+
+  const maze=document.createElement("div");
+  maze.id="maze";
+
+  const map=[
+    [0,0,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,1,0,0,1],
+    [1,1,1,1,1,0,1,0,1,1],
+    [1,0,0,0,1,0,0,0,0,1],
+    [1,0,1,0,1,1,1,1,0,1],
+    [1,0,1,0,0,0,0,1,0,1],
+    [1,0,1,1,1,1,0,1,0,1],
+    [1,0,0,0,0,1,0,0,0,1],
+    [1,1,1,1,0,0,0,1,0,1],
+    [1,1,1,1,1,1,1,1,0,0]
+  ];
+
+  maze.style.gridTemplateColumns="repeat(10,1fr)";
+
+  map.forEach((row,r)=>{
+    row.forEach((cell,c)=>{
+      const d=document.createElement("div");
+      d.className=cell?"wall":"cell";
+
+      if(r===0&&c===0)d.className="player";
+      if(r===9&&c===9)d.className="goal";
+
+      d.dataset.r=r;
+      d.dataset.c=c;
+      maze.appendChild(d);
+    });
+  });
+
+  area.appendChild(maze);
+
+  mazePlayer={r:0,c:0};
+  mazePos=map;
+
+  makeButton("⬆️",()=>moveMaze(-1,0));
+  makeButton("⬅️",()=>moveMaze(0,-1));
+  makeButton("⬇️",()=>moveMaze(1,0));
+  makeButton("➡️",()=>moveMaze(0,1));
 }
 
-function spaceUpdate(dt){
+function moveMaze(dr,dc){
+  const nr=mazePlayer.r+dr;
+  const nc=mazePlayer.c+dc;
 
- if(keys.left)ship.x-=7*dt;
- if(keys.right)ship.x+=7*dt;
+  if(nr<0||nr>=10||nc<0||nc>=10)return;
+  if(mazePos[nr][nc]===1)return;
 
- ship.x=Math.max(0,Math.min(600,ship.x));
+  mazePlayer.r=nr;
+  mazePlayer.c=nc;
 
- fireTimer-=dt;
+  const cells=document.querySelectorAll("#maze .cell,#maze .player,#maze .goal");
+  cells.forEach(c=>{
+    const r=+c.dataset.r;
+    const col=+c.dataset.c;
 
- if(fireTimer<=0){
+    if(r===mazePlayer.r&&col===mazePlayer.c){
+      c.className="player";
+    }else if(r===9&&col===9){
+      c.className="goal";
+    }else{
+      c.className=mazePos[r][col]?"wall":"cell";
+    }
+  });
 
-   fire();
-   fireTimer=.35;
- }
-
- bullets.forEach(b=>b.y-=10*dt);
-
- enemies.forEach(e=>{
-
-   e.x+=e.dx*dt;
-
-   if(e.x<0||e.x>605){
-     e.dx*=-1;
-     e.y+=15;
-   }
-
-   if(e.y>390){
-
-     lives--;
-     e.y=50;
-     stat();
-
-     if(lives<=0)finish("👾 THE SHIPS GOT THROUGH!");
-   }
-
- });
-
- bullets.forEach(b=>{
-
-   enemies.forEach(e=>{
-
-     if(e.w>0&&rectHit(b,e)){
-
-       e.w=0;
-       b.y=-100;
-       score+=15;
-     }
-   });
- });
-
- enemies=enemies.filter(e=>e.w>0);
-
- if(enemies.length===0){
-
-   level++;
-
-   if(level>5){
-     finish("🌌 GALAXY SAVED!");
-   }else{
-     spawnWave();
-   }
- }
-
- stat();
+  if(nr===9&&nc===9){
+    message.textContent="🎉 YOU ESCAPED!";
+  }
 }
 
-function spaceDraw(){
+/* =========================
+   6. ZOMBIE SURVIVAL
+========================= */
 
- ctx.fillStyle="#02040f";
- ctx.fillRect(0,0,640,480);
+let zoCanvas,zoCtx,zoPlayer,zoEnemies,zoBullets,zoScore,zoLives;
 
- /* stars */
- ctx.fillStyle="#fff";
+function startZombie(){
+  title.textContent="🧟 Zombie Survival";
+  info.textContent="Move around and shoot the zombies!";
+  area.innerHTML="";
 
- for(let i=0;i<70;i++){
+  zoCanvas=document.createElement("canvas");
+  zoCanvas.width=600;
+  zoCanvas.height=430;
+  zoCanvas.id="zombieCanvas";
+  area.appendChild(zoCanvas);
 
-   let x=(i*97)%640;
-   let y=(i*53)%480;
+  zoCtx=zoCanvas.getContext("2d");
 
-   ctx.fillRect(x,y,2,2);
- }
+  zoPlayer={x:300,y:215};
+  zoEnemies=[];
+  zoBullets=[];
+  zoScore=0;
+  zoLives=3;
 
- /* planet */
- ctx.beginPath();
- ctx.arc(550,80,50,0,Math.PI*2);
- ctx.fillStyle="#392b75";
- ctx.fill();
+  for(let i=0;i<6;i++){
+    zoEnemies.push({
+      x:Math.random()*560+20,
+      y:Math.random()*390+20,
+      speed:.7+Math.random()*.5
+    });
+  }
 
- /* ship */
- ctx.fillStyle="#00e5ff";
+  makeButton("⬆️",()=>zoPlayer.y=Math.max(20,zoPlayer.y-20));
+  makeButton("⬅️",()=>zoPlayer.x=Math.max(20,zoPlayer.x-20));
+  makeButton("🎯 SHOOT",shootZombie);
+  makeButton("➡️",()=>zoPlayer.x=Math.min(580,zoPlayer.x+20));
+  makeButton("⬇️",()=>zoPlayer.y=Math.min(410,zoPlayer.y+20));
 
- ctx.beginPath();
- ctx.moveTo(ship.x+20,ship.y);
- ctx.lineTo(ship.x,ship.y+25);
- ctx.lineTo(ship.x+40,ship.y+25);
- ctx.closePath();
- ctx.fill();
-
- /* enemies */
- enemies.forEach(e=>{
-
-   ctx.fillStyle="#ff3366";
-   ctx.fillRect(e.x,e.y,e.w,e.h);
-
-   ctx.fillStyle="#111";
-   ctx.fillRect(e.x+7,e.y+7,6,6);
-   ctx.fillRect(e.x+22,e.y+7,6,6);
- });
-
- ctx.fillStyle="#ffeb3b";
-
- bullets.forEach(b=>{
-   ctx.fillRect(b.x,b.y,b.w,b.h);
- });
+  gameRunning=true;
+  zombieLoop();
 }
 
+function shootZombie(){
+  if(!gameRunning)return;
 
-/* =====================================================
-   🏃 SKY RUNNER
-===================================================== */
+  let target=zoEnemies[0];
 
-let runner,rv,obstacles,runnerSpeed,runCoins,runDistance;
+  if(target){
+    const dx=target.x-zoPlayer.x;
+    const dy=target.y-zoPlayer.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
 
-function runnerStart(){
-
- document.getElementById("gameTitle").textContent="🏃 SKY RUNNER";
-
- runner={
-   x:100,
-   y:375,
-   w:35,
-   h:50
- };
-
- rv=0;
- obstacles=[];
- runCoins=[];
- runnerSpeed=5;
- runDistance=0;
-
- controls(`
- <button class="big" id="jumpButton">⬆️ JUMP</button>
- `);
-
- document.getElementById("jumpButton").onclick=jump;
+    zoBullets.push({
+      x:zoPlayer.x,
+      y:zoPlayer.y,
+      dx:dx/len*8,
+      dy:dy/len*8
+    });
+  }
 }
 
-function jump(){
-
- if(runner.y>=375)
-   rv=-13;
-}
-
-function runnerUpdate(dt){
-
- runDistance+=runnerSpeed*dt;
-
- rv+=.65*dt;
- runner.y+=rv*dt;
-
- if(runner.y>375){
-   runner.y=375;
-   rv=0;
- }
-
- runnerSpeed=5+Math.floor(runDistance/500)*.7;
-
- if(Math.random()<.018*dt){
-
-   obstacles.push({
-     x:660,
-     y:395,
-     w:35,
-     h:30
-   });
- }
-
- if(Math.random()<.012*dt){
-
-   runCoins.push({
-     x:660,
-     y:300+Math.random()*60,
-     r:9
-   });
- }
-
- obstacles.forEach(o=>{
-
-   o.x-=runnerSpeed*dt;
-
-   if(rectHit(runner,o)){
-
-     o.x=-100;
-     lives--;
-     stat();
-
-     if(lives<=0)finish("💥 RUN OVER!");
-   }
- });
-
- runCoins.forEach(c=>{
-
-   c.x-=runnerSpeed*dt;
-
-   let dx=runner.x+17-c.x;
-   let dy=runner.y+20-c.y;
-
-   if(Math.sqrt(dx*dx+dy*dy)<30){
-
-     c.x=-100;
-     score+=10;
-   }
- });
-
- obstacles=obstacles.filter(o=>o.x>-80);
- runCoins=runCoins.filter(c=>c.x>-30);
-
- score=Math.floor(runDistance/5);
- stat();
-}
-
-function runnerDraw(){
-
- /* sky */
- let sky=ctx.createLinearGradient(0,0,0,480);
- sky.addColorStop(0,"#168bd0");
- sky.addColorStop(1,"#d8f4ff");
-
- ctx.fillStyle=sky;
- ctx.fillRect(0,0,640,480);
-
- /* sun */
- ctx.beginPath();
- ctx.arc(520,80,45,0,Math.PI*2);
- ctx.fillStyle="#ffe082";
- ctx.fill();
-
- /* buildings */
- for(let i=0;i<10;i++){
-
-   let h=80+(i%4)*35;
-
-   ctx.fillStyle="#455a80";
-   ctx.fillRect(i*70,375-h,55,h);
- }
-
- /* ground */
- ctx.fillStyle="#30343b";
- ctx.fillRect(0,425,640,55);
-
- /* road */
- ctx.fillStyle="#f5f5f5";
-
- for(let x=0;x<640;x+=70)
-   ctx.fillRect(x,450,40,5);
-
- /* obstacles */
- obstacles.forEach(o=>{
-
-   ctx.fillStyle="#e53935";
-   ctx.fillRect(o.x,o.y,o.w,o.h);
- });
-
- /* coins */
- runCoins.forEach(c=>{
-
-   ctx.beginPath();
-   ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
-   ctx.fillStyle="#ffd600";
-   ctx.fill();
- });
-
- /* player */
- ctx.fillStyle="#6a35ff";
- ctx.fillRect(runner.x,runner.y,runner.w,runner.h);
-
- ctx.fillStyle="#fff";
- ctx.fillRect(runner.x+22,runner.y+10,7,7);
-}
-
-
-/* =====================================================
-   🧩 MAZE ESCAPE
-===================================================== */
-
-let mazeMap,mazePlayer,mazeTime;
-
-function mazeStart(){
-
- document.getElementById("gameTitle").textContent="🧩 MAZE ESCAPE";
-
- mazeTime=60;
-
- createMaze();
-
- controls(`
- <button class="big" data-key="up">⬆️</button>
- <button class="big" data-key="left">⬅️</button>
- <button class="big" data-key="down">⬇️</button>
- <button class="big" data-key="right">➡️</button>
- `);
-}
-
-function createMaze(){
-
- mazeMap=[
-  [1,1,1,1,1,1,1,1,1],
-  [1,0,0,0,1,0,0,0,1],
-  [1,0,1,0,1,0,1,0,1],
-  [1,0,1,0,0,0,1,0,1],
-  [1,0,1,1,1,1,1,0,1],
-  [1,0,0,0,0,0,0,0,1],
-  [1,1,1,1,1,1,1,0,1],
-  [1,0,0,0,0,0,0,0,1],
-  [1,1,1,1,1,1,1,1,1]
- ];
-
- mazePlayer={x:1,y:1};
-}
-
-function mazeUpdate(dt){
-
- mazeTime-=dt/60;
-
- document.getElementById("extra").textContent=
- "TIME "+Math.max(0,Math.ceil(mazeTime));
-
- let nx=mazePlayer.x;
- let ny=mazePlayer.y;
-
- if(keys.left){nx--;keys.left=false}
- if(keys.right){nx++;keys.right=false}
- if(keys.up){ny--;keys.up=false}
- if(keys.down){ny++;keys.down=false}
-
- if(mazeMap[ny]&&mazeMap[ny][nx]===0){
-
-   mazePlayer.x=nx;
-   mazePlayer.y=ny;
-   score++;
- }
-
- if(mazePlayer.x===7&&mazePlayer.y===7){
-
-   score+=Math.ceil(mazeTime*10);
-   finish("🏆 MAZE ESCAPED!");
- }
-
- if(mazeTime<=0)
-   finish("⏰ TIME UP!");
-
- stat();
-}
-
-function mazeDraw(){
-
- ctx.fillStyle="#10131d";
- ctx.fillRect(0,0,640,480);
-
- let cell=50;
- let ox=95;
- let oy=15;
-
- for(let y=0;y<9;y++){
-
-   for(let x=0;x<9;x++){
-
-     if(mazeMap[y][x]===1){
-
-       ctx.fillStyle="#343c62";
-       ctx.fillRect(
-         ox+x*cell,
-         oy+y*cell,
-         cell-2,
-         cell-2
- 
+function zombieLoop(){
+  if(!gameRunning)return;
+
+  zoCtx.clearRect(0,0,600,430);
+
+  /* player */
+  zoCtx.fillStyle="#38bdf8";
+  zoCtx.fillRect(zoPlayer.x-15,zoPlayer.y-15,30,30);
+
+  /* zombies */
+  zoEnemies.forEach(z=>{
+    const dx=zoPlayer.x-z.x;
+    const dy=zoPlayer.y-z.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+
+    z.x+=dx/len*z.speed;
+    z.y+=dy/len*z.speed;
+
+    zoCtx.fillStyle="#84cc16";
+    zoCtx.beginPath();
+    zoCtx.arc(z.x,z.y,17,0,Math.PI*2);
+    zoCtx.fill();
+
+    if(Math.hypot(z.x-zoPlayer.x,z.y-zoPlayer.y)<28){
+      z.x=Math.random()*560+20;
+      z.y=Math.random()*390+20;
+      zoLives--;
+    }
+  });
+
+  /* bullets */
+  zoBullets.forEach(b=>{
+    b.x+=b.dx;
+    b.y+=b.dy;
+
+    zoCtx.fillStyle="white";
+    zoCtx.beginPath();
+    zoCtx.arc(b.x,b.y,5,0,Math.PI*2);
+    zoCtx.fill();
+  });
+
+  zoBullets.forEach(b=>{
+    zoEnemies.forEach(z=>{
+      if(Math.hypot(b.x-z.x,b.y-z.y)<22){
+        z.x=Math.random()*560+20;
+        z.y=Math.random()*390+20;
+        b.x=-100;
+        zoScore++;
+      }
+    });
+  });
+
+  zoBullets=zoBullets.filter(b=>b.x>-20&&b.x<620&&b.y>-20&&b.y<450);
+
+  info.textContent="Score: "+zoScore+" | ❤️ "+zoLives;
+
+  if(zo
